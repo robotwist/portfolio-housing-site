@@ -25,7 +25,7 @@ const projects: Project[] = [
     imageUrl: '/images/placeholder.jpg',
     githubUrl: 'https://github.com/username/portfolio',
     liveUrl: 'https://portfolio.dev',
-    upvotes: 12
+    upvotes: 7
   },
   {
     id: 'ledgerline',
@@ -55,8 +55,8 @@ const projects: Project[] = [
     description: 'A simple yet addictive coin flipping game with leaderboards.',
     technologies: ['JavaScript', 'HTML', 'CSS', 'Firebase'],
     imageUrl: '/images/Coin-Flip.png',
-    githubUrl: 'https://github.com/username/coin-flip',
-    liveUrl: 'https://coin-flip-game.netlify.app',
+    githubUrl: 'https://github.com/robotwist/Coin-Flip-Game-Project-One-GA',
+    liveUrl: 'https://robotwist.github.io/Coin-Flip-Game-Project-One-GA/',
     upvotes: 5
   },
   {
@@ -65,8 +65,8 @@ const projects: Project[] = [
     description: 'A fun keyboard mashing game inspired by old school olympics games.',
     technologies: ['JavaScript', 'HTML Canvas', 'CSS'],
     imageUrl: '/images/100-meter-dash.jpg',
-    githubUrl: 'https://github.com/username/100m-dash',
-    liveUrl: 'https://100m-dash.netlify.app',
+    githubUrl: 'https://github.com/robotwist/100-meter-dash',
+    liveUrl: 'https://robotwist.github.io/100-meter-dash/',
     upvotes: 7
   },
   {
@@ -75,7 +75,7 @@ const projects: Project[] = [
     description: 'An admin dashboard for the Authentic Reader platform.',
     technologies: ['React', 'TypeScript', 'Material UI', 'D3.js', 'Redux'],
     imageUrl: '/images/authentic-dashboard.png',
-    githubUrl: 'https://github.com/username/authentic-dashboard',
+    githubUrl: 'https://github.com/robotwist/authentic-dashboard',
     liveUrl: 'https://dashboard.authentic-reader.vercel.app',
     upvotes: 9
   }
