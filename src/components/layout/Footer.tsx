@@ -12,7 +12,7 @@ export default function Footer() {
           </p>
           
           <div className="mt-6 md:mt-0 text-md text-foreground/50">
-            <p>Built with Next.js, Tailwind CSS, and Framer Motion</p>
+            <p>Built with Next.js, React, HTML5 Canvas, Typescript snd Framer Motion</p>
           </div>
         </div>
       </div>

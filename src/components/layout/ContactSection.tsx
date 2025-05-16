@@ -79,198 +79,192 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-16 sm:py-20 md:py-28">
-      <div className="container">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="max-w-2xl mx-auto"
-        >
-          <h2 className="gradient-headline text-3xl font-bold mb-8 text-center">Get in Touch</h2>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <div className="project-card">
+        <div className="card-content">
+          <h3 className="card-title text-center">Contact Me</h3>
+          <p className="card-description" style={{ fontSize: "1.1rem", marginBottom: "1.5rem", textAlign: "center" }}>
+            Interested in hiring me for your team? I'm currently available for exciting job opportunities 
+            where I can leverage my skills in web development and AI integration.
+          </p>
           
-          <div className="project-card" style={{ maxWidth: "700px", margin: "0 auto" }}>
-            <div className="card-content">
-              <p className="card-description" style={{ fontSize: "1.1rem", marginBottom: "1.5rem", textAlign: "center" }}>
-                Interested in hiring me for your team? I'm currently available for exciting job opportunities 
-                where I can leverage my skills in web development and AI integration.
-              </p>
-              
-              {status === 'success' ? (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="fallback-container"
-                  style={{ padding: "2rem" }}
-                >
-                  <div className="fallback-emoji" style={{ color: "var(--color-secondary)" }}>
-                    ✅
-                  </div>
-                  <h3 className="card-title" style={{ textAlign: "center" }}>Message Sent!</h3>
-                  <p className="card-description" style={{ textAlign: "center" }}>
-                    Thank you for reaching out. I'll get back to you soon about potential opportunities.
-                  </p>
-                </motion.div>
-              ) : (
-                <motion.form
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
-                  onSubmit={handleSubmit}
-                >
-                  {status === 'error' && (
-                    <div className="mb-6 p-4" style={{ 
-                      backgroundColor: "rgba(239, 68, 68, 0.1)", 
-                      border: "1px solid rgba(239, 68, 68, 0.2)",
-                      borderRadius: "0.5rem",
-                      color: "var(--color-destructive)",
-                      fontSize: "0.875rem",
-                      textAlign: "center" 
-                    }}>
-                      {errorMessage}
-                    </div>
-                  )}
-
-                  <div className="space-y-4">
-                    <div>
-                      <label htmlFor="name" className="block text-sm font-medium mb-2">
-                        Name
-                      </label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                        style={{
-                          width: "100%",
-                          padding: "0.75rem 1rem",
-                          backgroundColor: "var(--color-card-hover)",
-                          border: "1px solid var(--color-border)",
-                          borderRadius: "0.5rem",
-                          color: "var(--color-foreground)",
-                          outline: "none",
-                          transition: "border-color 0.2s ease"
-                        }}
-                        placeholder="Your name"
-                      />
-                    </div>
-
-                    <div>
-                      <label htmlFor="email" className="block text-sm font-medium mb-2">
-                        Email
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                        style={{
-                          width: "100%",
-                          padding: "0.75rem 1rem",
-                          backgroundColor: "var(--color-card-hover)",
-                          border: "1px solid var(--color-border)",
-                          borderRadius: "0.5rem",
-                          color: "var(--color-foreground)",
-                          outline: "none",
-                          transition: "border-color 0.2s ease"
-                        }}
-                        placeholder="your.email@example.com"
-                      />
-                    </div>
-
-                    <div>
-                      <label htmlFor="message" className="block text-sm font-medium mb-2">
-                        Message
-                      </label>
-                      <textarea
-                        id="message"
-                        name="message"
-                        value={formData.message}
-                        onChange={handleChange}
-                        required
-                        rows={4}
-                        style={{
-                          width: "100%",
-                          padding: "0.75rem 1rem",
-                          backgroundColor: "var(--color-card-hover)",
-                          border: "1px solid var(--color-border)",
-                          borderRadius: "0.5rem",
-                          color: "var(--color-foreground)",
-                          outline: "none",
-                          transition: "border-color 0.2s ease",
-                          resize: "vertical"
-                        }}
-                        placeholder="Tell me about the job opportunity or project..."
-                      />
-                    </div>
-
-                    <button
-                      type="submit"
-                      disabled={status === 'loading'}
-                      style={{
-                        width: "100%",
-                        padding: "0.75rem 1rem", 
-                        backgroundColor: "var(--color-primary)",
-                        color: "white",
-                        border: "none",
-                        borderRadius: "0.5rem",
-                        fontWeight: "500",
-                        cursor: status === 'loading' ? "not-allowed" : "pointer",
-                        transition: "all 0.2s ease",
-                        opacity: status === 'loading' ? "0.7" : "1"
-                      }}
-                      onMouseOver={(e) => {
-                        e.currentTarget.style.backgroundColor = "var(--color-primary-hover)";
-                        e.currentTarget.style.transform = "translateY(-2px)";
-                      }}
-                      onMouseOut={(e) => {
-                        e.currentTarget.style.backgroundColor = "var(--color-primary)";
-                        e.currentTarget.style.transform = "translateY(0)";
-                      }}
-                    >
-                      {status === 'loading' ? 'Sending...' : 'Send Message'}
-                    </button>
-                  </div>
-                </motion.form>
-              )}
-            </div>
-            
-            {/* Social Links */}
-            <div className="card-footer">
-              <p className="card-description" style={{ margin: 0, fontSize: "0.9rem" }}>
-                Or connect with me directly:
-              </p>
-              <div className="card-links">
-                {socials.map(({ href, label, svg, hover }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={label}
-                    className="card-link"
-                    style={{
-                      color: 'var(--color-muted-foreground)',
-                    }}
-                    onMouseOver={(e) => {
-                      e.currentTarget.style.color = hover as string;
-                    }}
-                    onMouseOut={(e) => {
-                      e.currentTarget.style.color = 'var(--color-muted-foreground)';
-                    }}
-                  >
-                    {svg}
-                  </a>
-                ))}
+          {status === 'success' ? (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="fallback-container"
+              style={{ padding: "2rem" }}
+            >
+              <div className="fallback-emoji" style={{ color: "var(--color-secondary)" }}>
+                ✅
               </div>
-            </div>
+              <h3 className="card-title" style={{ textAlign: "center" }}>Message Sent!</h3>
+              <p className="card-description" style={{ textAlign: "center" }}>
+                Thank you for reaching out. I'll get back to you soon about potential opportunities.
+              </p>
+            </motion.div>
+          ) : (
+            <motion.form
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              onSubmit={handleSubmit}
+            >
+              {status === 'error' && (
+                <div className="mb-6 p-4" style={{ 
+                  backgroundColor: "rgba(239, 68, 68, 0.1)", 
+                  border: "1px solid rgba(239, 68, 68, 0.2)",
+                  borderRadius: "0.5rem",
+                  color: "var(--color-destructive)",
+                  fontSize: "0.875rem",
+                  textAlign: "center" 
+                }}>
+                  {errorMessage}
+                </div>
+              )}
+
+              <div className="space-y-4">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium mb-2">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    style={{
+                      width: "100%",
+                      padding: "0.75rem 1rem",
+                      backgroundColor: "var(--color-card-hover)",
+                      border: "1px solid var(--color-border)",
+                      borderRadius: "0.5rem",
+                      color: "var(--color-foreground)",
+                      outline: "none",
+                      transition: "border-color 0.2s ease"
+                    }}
+                    placeholder="Your name"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium mb-2">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    style={{
+                      width: "100%",
+                      padding: "0.75rem 1rem",
+                      backgroundColor: "var(--color-card-hover)",
+                      border: "1px solid var(--color-border)",
+                      borderRadius: "0.5rem",
+                      color: "var(--color-foreground)",
+                      outline: "none",
+                      transition: "border-color 0.2s ease"
+                    }}
+                    placeholder="your.email@example.com"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium mb-2">
+                    Message
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                    rows={4}
+                    style={{
+                      width: "100%",
+                      padding: "0.75rem 1rem",
+                      backgroundColor: "var(--color-card-hover)",
+                      border: "1px solid var(--color-border)",
+                      borderRadius: "0.5rem",
+                      color: "var(--color-foreground)",
+                      outline: "none",
+                      transition: "border-color 0.2s ease",
+                      resize: "vertical"
+                    }}
+                    placeholder="Tell me about the job opportunity or project..."
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={status === 'loading'}
+                  style={{
+                    width: "100%",
+                    padding: "0.75rem 1rem", 
+                    backgroundColor: "var(--color-primary)",
+                    color: "white",
+                    border: "none",
+                    borderRadius: "0.5rem",
+                    fontWeight: "500",
+                    cursor: status === 'loading' ? "not-allowed" : "pointer",
+                    transition: "all 0.2s ease",
+                    opacity: status === 'loading' ? "0.7" : "1"
+                  }}
+                  onMouseOver={(e) => {
+                    e.currentTarget.style.backgroundColor = "var(--color-primary-hover)";
+                    e.currentTarget.style.transform = "translateY(-2px)";
+                  }}
+                  onMouseOut={(e) => {
+                    e.currentTarget.style.backgroundColor = "var(--color-primary)";
+                    e.currentTarget.style.transform = "translateY(0)";
+                  }}
+                >
+                  {status === 'loading' ? 'Sending...' : 'Send Message'}
+                </button>
+              </div>
+            </motion.form>
+          )}
+        </div>
+        
+        {/* Social Links */}
+        <div className="card-footer">
+          <p className="card-description" style={{ margin: 0, fontSize: "0.9rem" }}>
+            Or connect with me directly:
+          </p>
+          <div className="card-links">
+            {socials.map(({ href, label, svg, hover }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                className="card-link"
+                style={{
+                  color: 'var(--color-muted-foreground)',
+                }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.color = hover as string;
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.color = 'var(--color-muted-foreground)';
+                }}
+              >
+                {svg}
+              </a>
+            ))}
           </div>
-        </motion.div>
+        </div>
       </div>
-    </section>
+    </motion.div>
   );
 } 
