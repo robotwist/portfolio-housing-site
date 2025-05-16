@@ -82,7 +82,7 @@ Question: ${message} [/INST]</s>`,
       
       // Fall back to pattern matching if the API fails
       const messageLower = message.toLowerCase();
-      let responseText = "I'm sorry, I don't have an answer for that yet. My training is limited to portfolio information.";
+      let responseText = "I'm sorry, I don't have an answer for that yet. I would ask Rob. He is pretty intelligent. I am the artificial one";
       
       for (const pattern of FALLBACK_RESPONSES) {
         if (pattern.keywords.some(keyword => messageLower.includes(keyword))) {
