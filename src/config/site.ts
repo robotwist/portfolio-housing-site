@@ -16,10 +16,10 @@ export interface SiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
-  name: 'Portfolio Showcase',
-  description: 'A modern portfolio showcase platform for developers and creators',
-  url: 'https://portfolio-showcase.com',
-  ogImage: 'https://portfolio-showcase.com/og.jpg',
+  name: 'Rob Wistrand - Portfolio',
+  description: 'Full Stack Developer & AI Enthusiast - Building modern, authentic web experiences',
+  url: 'https://robwistrand.com',
+  ogImage: '/images/Authentic-Internet-Whale.png',
   links: {
     github: 'https://github.com/robotwist/portfolio-site',
     twitter: 'https://twitter.com/robotwist',

@@ -20,25 +20,32 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen">
+    <main style={{ minHeight: '100vh' }}>
       <Header toggleChat={handleToggleChat} />
       <HeroSection />
       
       {/* Tech Scroll Section */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">
-            <span className="text-gradient">
+      <section id="technologies" style={{
+        padding: '4rem 0',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        background: '#0d1117'
+      }}>
+        <div className="container">
+          <h2 style={{
+            fontSize: '2.5rem',
+            fontWeight: 'bold',
+            marginBottom: '2.5rem',
+            textAlign: 'center',
+            position: 'relative',
+            zIndex: 10
+          }}>
+            <span className="text-gradient" style={{padding: '0.5rem 1rem'}}>
               Technologies & Skills
             </span>
           </h2>
-          {/* Logo */}
-          <img
-            src="/images/authentic-internet.png"
-            alt="Authentic Internet Logo"
-            className="w-24 h-24 mb-10 mx-auto rounded-full shadow-lg border-4 border-card-bg bg-card-bg"
-            draggable={false}
-          />
           <TechScroll />
         </div>
       </section>

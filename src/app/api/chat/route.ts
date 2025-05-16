@@ -71,7 +71,7 @@ Question: ${message} [/INST]</s>`,
       let aiResponse = result[0]?.generated_text || '';
       
       // Clean up the response (remove instruction tokens if present)
-      aiResponse = aiResponse.replace(/<s>\[INST\].*?\[\/INST\]<\/s>/gs, '').trim();
+      aiResponse = aiResponse.replace(/<s>\[INST\][\s\S]*?\[\/INST\]<\/s>/g, '').trim();
       
       return NextResponse.json({
         message: aiResponse,
