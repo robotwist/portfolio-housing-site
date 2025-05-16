@@ -15,7 +15,12 @@ export interface AIChatHandle {
 
 const AIChat = forwardRef<AIChatHandle, {}>((props, ref) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<Message[]>([
+    { 
+      role: 'assistant', 
+      content: "Hi there! I'm Rob's portfolio assistant. What would you like to know about his work or experience?" 
+    }
+  ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -86,83 +91,204 @@ const AIChat = forwardRef<AIChatHandle, {}>((props, ref) => {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-4 sm:bottom-8 right-4 sm:right-8 bg-primary text-white p-3 sm:p-5 rounded-full shadow-lg hover:bg-primary-dark transition-colors focus-ring"
+        style={{
+          position: "fixed",
+          bottom: "1.5rem",
+          right: "1.5rem",
+          backgroundColor: "var(--color-primary)",
+          color: "white",
+          padding: "1rem",
+          borderRadius: "50%",
+          boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
+          border: "none",
+          cursor: "pointer",
+          zIndex: 50,
+          transition: "background-color 0.2s ease, transform 0.2s ease",
+        }}
+        onMouseOver={(e) => {
+          e.currentTarget.style.backgroundColor = "var(--color-primary-hover)";
+        }}
+        onMouseOut={(e) => {
+          e.currentTarget.style.backgroundColor = "var(--color-primary)";
+        }}
         aria-label="Open chat"
       >
-        <FaRobot className="w-6 h-6" />
+        <FaRobot style={{ width: "1.5rem", height: "1.5rem" }} />
       </motion.button>
 
       {/* Chat window */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 20 }}
-            className="fixed bottom-4 sm:bottom-8 right-4 sm:right-8 w-[calc(100%-2rem)] sm:w-96 h-[500px] bg-card-bg rounded-lg shadow-lg border border-border flex flex-col"
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            transition={{ duration: 0.3 }}
+            className="project-card"
+            style={{
+              position: "fixed",
+              bottom: "2rem",
+              right: "2rem",
+              width: "380px",
+              maxWidth: "calc(100vw - 40px)",
+              height: "500px",
+              maxHeight: "calc(100vh - 100px)",
+              zIndex: 100,
+              display: "flex",
+              flexDirection: "column",
+              overflow: "hidden",
+              boxShadow: "0 10px 25px rgba(0, 0, 0, 0.2)",
+            }}
           >
             {/* Chat header */}
-            <div className="p-4 sm:p-5 border-b border-border flex justify-between items-center">
-              <div className="flex items-center gap-3">
-                <FaRobot className="w-5 h-5 text-primary" />
-                <h3 className="font-semibold">AI Assistant</h3>
+            <div className="card-header" style={{
+              padding: "1rem 1.5rem",
+              borderBottom: "1px solid var(--color-border)",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              backgroundColor: "var(--color-card-bg)",
+            }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+                <FaRobot style={{ color: "var(--color-primary)", width: "1.25rem", height: "1.25rem" }} />
+                <h3 className="card-title" style={{ margin: 0 }}>Chat with Me</h3>
               </div>
               <button
                 onClick={() => setIsOpen(false)}
-                className="text-foreground/70 hover:text-foreground transition-colors focus-ring"
+                style={{
+                  background: "none",
+                  border: "none",
+                  color: "var(--color-muted-foreground)",
+                  cursor: "pointer",
+                  padding: "0.5rem",
+                  borderRadius: "0.25rem",
+                  transition: "color 0.2s ease, background-color 0.2s ease",
+                }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.backgroundColor = "var(--color-card-hover)";
+                  e.currentTarget.style.color = "var(--color-foreground)";
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.backgroundColor = "transparent";
+                  e.currentTarget.style.color = "var(--color-muted-foreground)";
+                }}
+                aria-label="Close chat"
               >
-                <FaTimes className="w-5 h-5" />
+                <FaTimes style={{ width: "1.25rem", height: "1.25rem" }} />
               </button>
             </div>
 
             {/* Chat messages */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4">
-              {messages.length === 0 ? (
-                <div className="text-center text-foreground/70 py-8">
-                  <FaRobot className="w-8 h-8 mx-auto mb-3 text-primary/50" />
-                  <p>How can I help you today?</p>
-                </div>
-              ) : (
-                messages.map((message, index) => (
+            <div className="card-content" style={{
+              flex: 1,
+              overflowY: "auto",
+              padding: "1rem",
+              backgroundColor: "var(--color-card-bg)",
+              display: "flex",
+              flexDirection: "column",
+              gap: "1rem"
+            }}>
+              {messages.map((message, index) => (
+                <div
+                  key={index}
+                  style={{
+                    display: "flex",
+                    justifyContent: message.role === 'user' ? "flex-end" : "flex-start",
+                    alignItems: "flex-start",
+                    width: "100%",
+                  }}
+                >
                   <div
-                    key={index}
-                    className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                    style={{
+                      maxWidth: "80%",
+                      padding: "0.75rem 1rem",
+                      borderRadius: "0.5rem",
+                      backgroundColor: message.role === 'user' 
+                        ? "var(--color-primary)" 
+                        : "var(--color-card-hover)",
+                      color: message.role === 'user' 
+                        ? "white" 
+                        : "var(--color-foreground)",
+                      boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+                      wordBreak: "break-word"
+                    }}
                   >
-                    <div
-                      className={`max-w-[80%] rounded-lg p-3 ${
-                        message.role === 'user'
-                          ? 'bg-primary text-white'
-                          : 'bg-secondary text-foreground'
-                      }`}
-                    >
-                      {message.content}
-                    </div>
+                    {message.content}
                   </div>
-                ))
-              )}
+                </div>
+              ))}
+              
               {isLoading && (
-                <div className="flex justify-start">
-                  <div className="bg-secondary text-foreground rounded-lg p-3">
-                    <div className="flex space-x-2">
-                      <div className="w-2 h-2 bg-foreground/50 rounded-full animate-bounce" />
-                      <div className="w-2 h-2 bg-foreground/50 rounded-full animate-bounce delay-100" />
-                      <div className="w-2 h-2 bg-foreground/50 rounded-full animate-bounce delay-200" />
+                <div style={{ display: "flex", justifyContent: "flex-start" }}>
+                  <div style={{
+                    backgroundColor: "var(--color-card-hover)",
+                    color: "var(--color-foreground)",
+                    padding: "0.75rem 1rem",
+                    borderRadius: "0.5rem",
+                    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+                  }}>
+                    <div style={{ display: "flex", gap: "4px", alignItems: "center" }}>
+                      <div style={{
+                        width: "8px",
+                        height: "8px",
+                        borderRadius: "50%",
+                        backgroundColor: "var(--color-primary)",
+                        opacity: 0.7,
+                        animation: "bounce 1.4s infinite ease-in-out both",
+                        animationDelay: "0s"
+                      }} />
+                      <div style={{
+                        width: "8px",
+                        height: "8px",
+                        borderRadius: "50%",
+                        backgroundColor: "var(--color-primary)",
+                        opacity: 0.7,
+                        animation: "bounce 1.4s infinite ease-in-out both",
+                        animationDelay: "0.2s"
+                      }} />
+                      <div style={{
+                        width: "8px",
+                        height: "8px",
+                        borderRadius: "50%",
+                        backgroundColor: "var(--color-primary)",
+                        opacity: 0.7,
+                        animation: "bounce 1.4s infinite ease-in-out both",
+                        animationDelay: "0.4s"
+                      }} />
                     </div>
                   </div>
                 </div>
               )}
+              
               <div ref={messagesEndRef} />
             </div>
 
             {/* Chat input */}
-            <form onSubmit={handleSubmit} className="p-4 border-t border-border">
-              <div className="flex gap-2">
+            <div className="card-footer" style={{
+              padding: "1rem",
+              borderTop: "1px solid var(--color-border)",
+              backgroundColor: "var(--color-card-bg)",
+            }}>
+              <form onSubmit={handleSubmit} style={{ display: "flex", gap: "0.5rem" }}>
                 <textarea
                   ref={inputRef}
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   placeholder="Type your message..."
-                  className="flex-1 bg-secondary border border-border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors resize-none"
+                  style={{
+                    flex: 1,
+                    padding: "0.75rem 1rem",
+                    backgroundColor: "var(--color-card-hover)",
+                    border: "1px solid var(--color-border)",
+                    borderRadius: "0.5rem",
+                    color: "var(--color-foreground)",
+                    outline: "none",
+                    resize: "none",
+                    transition: "border-color 0.2s ease",
+                    fontFamily: "inherit",
+                    fontSize: "0.875rem",
+                    lineHeight: "1.5",
+                  }}
                   rows={1}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter' && !e.shiftKey) {
@@ -170,21 +296,59 @@ const AIChat = forwardRef<AIChatHandle, {}>((props, ref) => {
                       handleSubmit(e);
                     }
                   }}
+                  onFocus={(e) => {
+                    e.currentTarget.style.borderColor = "var(--color-primary)";
+                  }}
+                  onBlur={(e) => {
+                    e.currentTarget.style.borderColor = "var(--color-border)";
+                  }}
                 />
                 <button
                   type="submit"
                   disabled={!input.trim() || isLoading}
-                  className="bg-primary text-white p-2 rounded-lg hover:bg-primary-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed focus-ring"
+                  style={{
+                    padding: "0.75rem 1rem",
+                    backgroundColor: "var(--color-primary)",
+                    color: "white",
+                    border: "none",
+                    borderRadius: "0.5rem",
+                    cursor: !input.trim() || isLoading ? "not-allowed" : "pointer",
+                    transition: "all 0.2s ease",
+                    opacity: !input.trim() || isLoading ? 0.6 : 1,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                  onMouseOver={(e) => {
+                    if (input.trim() && !isLoading) {
+                      e.currentTarget.style.backgroundColor = "var(--color-primary-hover)";
+                      e.currentTarget.style.transform = "translateY(-2px)";
+                    }
+                  }}
+                  onMouseOut={(e) => {
+                    e.currentTarget.style.backgroundColor = "var(--color-primary)";
+                    e.currentTarget.style.transform = "translateY(0)";
+                  }}
                 >
-                  <FaPaperPlane className="w-5 h-5" />
+                  <FaPaperPlane style={{ width: "1.25rem", height: "1.25rem" }} />
                 </button>
-              </div>
-            </form>
+              </form>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
+      
+      {/* Animation for the dots */}
+      <style jsx global>{`
+        @keyframes bounce {
+          0%, 80%, 100% { transform: scale(0); }
+          40% { transform: scale(1.0); }
+        }
+      `}</style>
     </>
   );
 });
+
+AIChat.displayName = 'AIChat';
 
 export default AIChat; 
