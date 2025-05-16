@@ -23,7 +23,7 @@ const projects: Project[] = [
     description: 'My personal portfolio site built with Next.js 14 and React.',
     technologies: ['Next.js', 'React', 'CSS', 'Framer Motion'],
     imageUrl: '/images/placeholder.jpg',
-    githubUrl: 'https://github.com/username/portfolio',
+    githubUrl: 'https://github.com/robotwist/portfolio-housing-site',
     liveUrl: 'https://portfolio.dev',
     upvotes: 7
   },

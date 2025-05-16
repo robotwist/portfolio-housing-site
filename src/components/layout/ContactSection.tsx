@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
@@ -12,6 +12,13 @@ export default function ContactSection() {
   });
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
+  const [isNetlify, setIsNetlify] = useState(false);
+
+  // Check if running on Netlify (in production)
+  useEffect(() => {
+    // We'll assume we're on Netlify in production, and not in development
+    setIsNetlify(process.env.NODE_ENV === 'production');
+  }, []);
 
   // Social icon SVGs from Header component
   const socials = [
@@ -53,20 +60,30 @@ export default function ContactSection() {
     setErrorMessage('');
 
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+      if (isNetlify) {
+        // On Netlify, the form will be handled automatically
+        // We just need to submit the form normally
+        const form = e.target as HTMLFormElement;
+        form.submit();
+        // Note: We don't actually reach this point since the form is submitted to Netlify
+        setStatus('success');
+      } else {
+        // In development, use our API route
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
 
-      if (!response.ok) {
-        throw new Error('Failed to send message');
+        if (!response.ok) {
+          throw new Error('Failed to send message');
+        }
+
+        setStatus('success');
+        setFormData({ name: '', email: '', message: '' });
       }
-
-      setStatus('success');
-      setFormData({ name: '', email: '', message: '' });
     } catch (error) {
       setStatus('error');
       setErrorMessage('Failed to send message. Please try again later.');
@@ -113,7 +130,18 @@ export default function ContactSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
               onSubmit={handleSubmit}
+              name="contact"
+              method="POST"
+              data-netlify="true"
+              netlify-honeypot="bot-field"
+              action="/success"
             >
+              {/* Hidden fields required for Netlify Forms */}
+              <input type="hidden" name="form-name" value="contact" />
+              <div hidden>
+                <input name="bot-field" />
+              </div>
+
               {status === 'error' && (
                 <div className="mb-6 p-4" style={{ 
                   backgroundColor: "rgba(239, 68, 68, 0.1)", 
