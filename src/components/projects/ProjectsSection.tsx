@@ -18,25 +18,14 @@ export interface Project {
 
 const projects: Project[] = [
   {
-    id: 'portfolio-site',
-    title: 'Portfolio Site',
-    description: 'My personal portfolio site built with Next.js 14 and React.',
-    technologies: ['Next.js', 'React', 'CSS', 'Framer Motion'],
-    imageUrl: '/images/placeholder.jpg',
-    githubUrl: 'https://github.com/robotwist/portfolio-housing-site',
-    liveUrl: 'https://portfolio.dev',
-    upvotes: 7
-  },
-  {
-    id: 'ledgerline',
-    title: 'LedgerLine',
-    description: 'A modern accounting platform built with React and Node.js.',
-    technologies: ['React', 'Node.js', 'Express', 'MongoDB', 'Tailwind'],
-    imageUrl: '/images/Ledgerline-Opening.png',
-    videoUrl: '/videos/ledgerline-demo.mp4', 
-    githubUrl: 'https://github.com/ledgerline/frontend',
-    liveUrl: 'https://ledgerline.io',
-    upvotes: 8
+    id: 'authentic-internet',
+    title: 'Authentic Internet Game',
+    description: 'This is a standalone game that has capacity to become a social site where users exchange artifacts',
+    technologies: ['Next.js', 'React', 'CSS'],
+    imageUrl: '/images/authentic-internet.png',
+    githubUrl: 'https://github.com/robotwist/authentic-internet',
+    liveUrl: 'https://flourishing-starburst-8cf88b.netlify.app/',
+    upvotes: 17
   },
   {
     id: 'authentic-reader',
@@ -49,6 +38,28 @@ const projects: Project[] = [
     liveUrl: 'https://authentic-reader.vercel.app',
     upvotes: 15
   },
+  {
+    id: 'authentic-dashboard',
+    title: 'Authentic Dashboard',
+    description: 'An admin dashboard for the Authentic Reader platform.',
+    technologies: ['React', 'TypeScript', 'Material UI', 'D3.js', 'Redux'],
+    imageUrl: '/images/authentic-dashboard.png',
+    githubUrl: 'https://github.com/robotwist/authentic-dashboard',
+    liveUrl: 'https://dashboard.authentic-reader.vercel.app',
+    upvotes: 9
+  },
+  {
+    id: 'ledgerline',
+    title: 'LedgerLine',
+    description: 'A modern accounting platform built with React and Node.js.',
+    technologies: ['React', 'Node.js', 'Express', 'MongoDB', 'Tailwind'],
+    imageUrl: '/images/Ledgerline-Opening.png',
+    videoUrl: '/videos/ledgerline-demo.mp4', 
+    githubUrl: 'https://github.com/robotwist/Ledgerline',
+    liveUrl: 'https://ledgerline-a661b98ef7f7.herokuapp.com/',
+    upvotes: 8
+  },
+  
   {
     id: 'coin-flip',
     title: 'Coin Flip Game',
@@ -68,16 +79,6 @@ const projects: Project[] = [
     githubUrl: 'https://github.com/robotwist/100-meter-dash',
     liveUrl: 'https://robotwist.github.io/100-meter-dash/',
     upvotes: 7
-  },
-  {
-    id: 'authentic-dashboard',
-    title: 'Authentic Dashboard',
-    description: 'An admin dashboard for the Authentic Reader platform.',
-    technologies: ['React', 'TypeScript', 'Material UI', 'D3.js', 'Redux'],
-    imageUrl: '/images/authentic-dashboard.png',
-    githubUrl: 'https://github.com/robotwist/authentic-dashboard',
-    liveUrl: 'https://dashboard.authentic-reader.vercel.app',
-    upvotes: 9
   }
 ];
 
