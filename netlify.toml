@@ -2,11 +2,9 @@
   command = "npm run build"
   publish = "out"
 
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
-
-[build.environment]
-  NEXT_USE_NETLIFY_EDGE = "true"
+# Since we're using static export, we don't need the Next.js plugin
+# [[plugins]]
+#  package = "@netlify/plugin-nextjs"
 
 # Make sure all routes are handled correctly with SPA fallback
 [[redirects]]
@@ -14,16 +12,8 @@
   to = "/index.html"
   status = 200
 
-# Handle static assets from public directory
-[[redirects]]
-  from = "/videos/*"
-  to = "/.next/public/videos/:splat"
-  status = 200
-
-[[redirects]]
-  from = "/images/*"
-  to = "/.next/public/images/:splat"
-  status = 200
+# No need for special redirects for static assets in static export
+# as they're already in the correct location
 
 [build.processing]
   skip_processing = false

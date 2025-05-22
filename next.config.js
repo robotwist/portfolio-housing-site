@@ -30,8 +30,15 @@ const nextConfig = {
     ],
     unoptimized: true, // This is required for static export
   },
-  // Static exports don't support rewrites, so we'll rely on the file structure
-  // Remove the rewrites section
+  // Tell Next.js to ignore API routes during static export
+  distDir: '.next',
+  trailingSlash: true,
+  exportPathMap: async function() {
+    return {
+      '/': { page: '/' },
+      '/success': { page: '/success' }
+    };
+  }
 }
 
 module.exports = nextConfig 
