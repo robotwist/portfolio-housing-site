@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "@/styles/globals.css";
 import LoadingScreen from "@/components/ui/LoadingScreen";
+import SkipLink from "@/components/ui/SkipLink";
 
 export const viewport = {
   width: "device-width",
@@ -72,8 +73,11 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body>
+        <SkipLink />
         <LoadingScreen />
-        {children}
+        <div role="main" id="main-content" tabIndex={-1}>
+          {children}
+        </div>
       </body>
     </html>
   );

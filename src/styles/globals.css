@@ -268,4 +268,70 @@ section {
   }
 }
 
+/* Accessibility Styles */
+:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Skip Link */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #3b82f6;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  z-index: 100;
+  transition: top 0.3s ease;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* High Contrast Mode */
+@media (forced-colors: active) {
+  .project-card {
+    border: 2px solid CanvasText;
+  }
+  
+  .tech-tag {
+    border: 1px solid CanvasText;
+  }
+  
+  .upvote-button {
+    border: 1px solid CanvasText;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .project-card {
+    transition: none !important;
+  }
+  
+  .loading-screen {
+    transition: none !important;
+  }
+}
+
 /* Add any other global styles as needed */ 

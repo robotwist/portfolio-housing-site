@@ -61,8 +61,14 @@ export default function ProjectCard({ project, index, onUpvote }: ProjectCardPro
       className="project-card"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      role="article"
+      aria-labelledby={`project-title-${project.id}`}
     >
-      <div className="media-container">
+      <div 
+        className="media-container"
+        role="presentation"
+        aria-hidden="true"
+      >
         {isClient && project.videoUrl && isHovered ? (
           <video
             ref={videoRef}
@@ -72,6 +78,7 @@ export default function ProjectCard({ project, index, onUpvote }: ProjectCardPro
             playsInline
             preload="metadata"
             poster={project.imageUrl}
+            aria-hidden="true"
           >
             <source src={project.videoUrl} type="video/mp4" />
             Your browser does not support the video tag.
@@ -96,7 +103,7 @@ export default function ProjectCard({ project, index, onUpvote }: ProjectCardPro
                 />
               </div>
             ) : (
-              <div className="fallback-container">
+              <div className="fallback-container" role="img" aria-label={`${project.title} project image`}>
                 <div className="fallback-emoji">🖼️</div>
                 <p className="fallback-text">{project.title}</p>
               </div>
@@ -105,37 +112,63 @@ export default function ProjectCard({ project, index, onUpvote }: ProjectCardPro
         )}
         
         {project.videoUrl && (
-          <div className="video-indicator" style={{ opacity: isHovered ? 0 : 1 }}>
+          <div 
+            className="video-indicator" 
+            style={{ opacity: isHovered ? 0 : 1 }}
+            role="img"
+            aria-label="Video available"
+          >
             <FaPlay style={{ color: 'white', fontSize: '0.75rem' }} />
           </div>
         )}
       </div>
       
       <div className="card-content">
-        <h3 className="card-title text-gradient">{project.title}</h3>
+        <h3 
+          id={`project-title-${project.id}`}
+          className="card-title text-gradient"
+        >
+          {project.title}
+        </h3>
         <p className="card-description">{project.description}</p>
         
-        <div className="tech-tags">
+        <div 
+          className="tech-tags"
+          role="list"
+          aria-label="Technologies used"
+        >
           {project.technologies.slice(0, 4).map((tech) => (
-            <span key={tech} className="tech-tag">
+            <span 
+              key={tech} 
+              className="tech-tag"
+              role="listitem"
+            >
               {tech}
             </span>
           ))}
           {project.technologies.length > 4 && (
-            <span className="more-tag">
+            <span 
+              className="more-tag"
+              role="listitem"
+            >
               +{project.technologies.length - 4} more
             </span>
           )}
         </div>
         
         <div className="card-footer">
-          <div className="card-links">
+          <div 
+            className="card-links"
+            role="navigation"
+            aria-label="Project links"
+          >
             <Link
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="card-link"
               prefetch={false}
+              aria-label={`View ${project.title} on GitHub`}
             >
               <FaGithub />
               <span>GitHub</span>
@@ -146,6 +179,7 @@ export default function ProjectCard({ project, index, onUpvote }: ProjectCardPro
               rel="noopener noreferrer"
               className="card-link"
               prefetch={false}
+              aria-label={`View ${project.title} live demo`}
             >
               <FaExternalLinkAlt />
               <span>Demo</span>
@@ -156,6 +190,7 @@ export default function ProjectCard({ project, index, onUpvote }: ProjectCardPro
             onClick={handleLike}
             className={`upvote-button ${isLiked ? 'upvote-active' : ''}`}
             aria-label={`Like ${project.title}`}
+            aria-pressed={isLiked}
           >
             <FaHeart />
             <span>{project.upvotes}</span>
