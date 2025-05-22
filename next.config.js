@@ -30,15 +30,9 @@ const nextConfig = {
     ],
     unoptimized: true, // This is required for static export
   },
-  // Tell Next.js to ignore API routes during static export
-  distDir: '.next',
+  // Tell Next.js to use trailingSlash for compatibility
   trailingSlash: true,
-  exportPathMap: async function() {
-    return {
-      '/': { page: '/' },
-      '/success': { page: '/success' }
-    };
-  }
+  distDir: '.next',
 }
 
 module.exports = nextConfig 
