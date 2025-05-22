@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FaGithub, FaExternalLinkAlt, FaHeart, FaPlay } from 'react-icons/fa';
 import type { Project } from './ProjectsSection';
@@ -18,10 +18,17 @@ export default function ProjectCard({ project, index, onUpvote }: ProjectCardPro
   const [isLiked, setIsLiked] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [imageError, setImageError] = useState(false);
+  const [isClient, setIsClient] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   const handleMouseEnter = () => {
+    if (!isClient) return;
     setIsHovered(true);
+    console.log("Hovered! videoUrl:", project.videoUrl);
     if (videoRef.current && project.videoUrl) {
       videoRef.current.play().catch(error => {
         console.error("Video playback error:", error);
@@ -30,6 +37,7 @@ export default function ProjectCard({ project, index, onUpvote }: ProjectCardPro
   };
 
   const handleMouseLeave = () => {
+    if (!isClient) return;
     setIsHovered(false);
     if (videoRef.current && project.videoUrl) {
       videoRef.current.pause();
@@ -56,15 +64,18 @@ export default function ProjectCard({ project, index, onUpvote }: ProjectCardPro
       onMouseLeave={handleMouseLeave}
     >
       <div className="media-container">
-        {project.videoUrl && isHovered ? (
+        {isClient && project.videoUrl && isHovered ? (
           <video
             ref={videoRef}
             className="project-video"
-            src={project.videoUrl}
             muted
             loop
             playsInline
-          />
+            preload="metadata"
+          >
+            <source src={project.videoUrl} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
         ) : (
           <>
             {!imageError ? (
