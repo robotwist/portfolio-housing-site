@@ -8,13 +8,41 @@
 [build.environment]
   NEXT_USE_NETLIFY_EDGE = "true"
 
-# Ensure public directory is properly handled
+# Copy public directory to publish folder
+[[plugins]]
+  package = "netlify-plugin-inline-functions-env"
+
+# Make sure public files can be accessed
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Handle static assets from public directory
 [[redirects]]
   from = "/videos/*"
-  to = "/videos/:splat"
+  to = "/.next/public/videos/:splat"
   status = 200
 
 [[redirects]]
   from = "/images/*"
-  to = "/images/:splat"
-  status = 200 
+  to = "/.next/public/images/:splat"
+  status = 200
+
+# Add asset copy command to build
+[build.processing]
+  skip_processing = false
+
+[build.processing.css]
+  bundle = false
+  minify = false
+
+[build.processing.js]
+  bundle = false
+  minify = false
+
+[build.processing.images]
+  compress = false
+
+[[plugins]]
+  package = "netlify-plugin-cache-nextjs" 

@@ -27,6 +27,20 @@ const nextConfig = {
         hostname: '**.unsplash.com',
       }
     ],
+    unoptimized: true, // This helps with Netlify deployments
+  },
+  // Ensure static assets in the public directory are properly served
+  async rewrites() {
+    return [
+      {
+        source: '/images/:path*',
+        destination: '/public/images/:path*',
+      },
+      {
+        source: '/videos/:path*',
+        destination: '/public/videos/:path*',
+      },
+    ]
   },
 }
 
