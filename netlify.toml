@@ -8,10 +8,6 @@
 [build.environment]
   NEXT_USE_NETLIFY_EDGE = "true"
 
-# Copy public directory to publish folder
-[[plugins]]
-  package = "netlify-plugin-inline-functions-env"
-
 # Make sure public files can be accessed
 [[redirects]]
   from = "/*"
@@ -29,7 +25,6 @@
   to = "/.next/public/images/:splat"
   status = 200
 
-# Add asset copy command to build
 [build.processing]
   skip_processing = false
 
@@ -42,7 +37,4 @@
   minify = false
 
 [build.processing.images]
-  compress = false
-
-[[plugins]]
-  package = "netlify-plugin-cache-nextjs" 
+  compress = false 
