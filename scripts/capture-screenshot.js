@@ -56,6 +56,93 @@ const PROJECTS = [
     url: 'https://your-game-platform-url.com', // Update this URL
     width: 1280,
     height: 800
+  },
+  {
+    name: 'instagone',
+    url: 'https://chromewebstore.google.com/detail/cfkohckelcbibalhhmgjllhfibkbeknl',
+    width: 1280,
+    height: 800,
+    waitForSelector: 'body',
+    waitTime: 5000,
+    evaluate: async (page) => {
+      try {
+        // Wait for the main content to load
+        await page.waitForSelector('h1', { timeout: 10000 });
+        // Scroll to ensure all content is loaded
+        await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+        await page.waitForTimeout(2000);
+      } catch (error) {
+        console.log('Warning: Could not fully load Instagone page');
+      }
+    }
+  },
+  {
+    name: 'facebook-friends-only',
+    url: 'https://chromewebstore.google.com/detail/lemgnohfbnoclnblnhiadeabkmjbbilj',
+    width: 1280,
+    height: 800,
+    waitForSelector: 'body',
+    waitTime: 5000,
+    evaluate: async (page) => {
+      try {
+        await page.waitForSelector('h1', { timeout: 10000 });
+        await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+        await page.waitForTimeout(2000);
+      } catch (error) {
+        console.log('Warning: Could not fully load Facebook Friends Only page');
+      }
+    }
+  },
+  {
+    name: 'linkedin-jobs-only',
+    url: 'https://chromewebstore.google.com/detail/eojclkjofepnlmopjcpmblbkjmipipcn',
+    width: 1280,
+    height: 800,
+    waitForSelector: 'body',
+    waitTime: 5000,
+    evaluate: async (page) => {
+      try {
+        await page.waitForSelector('h1', { timeout: 10000 });
+        await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+        await page.waitForTimeout(2000);
+      } catch (error) {
+        console.log('Warning: Could not fully load LinkedIn Jobs Only page');
+      }
+    }
+  },
+  {
+    name: 'summon-nkd-man',
+    url: 'https://chromewebstore.google.com/detail/penadbpfpdlcikkahaniobpnoikgjfoh',
+    width: 1280,
+    height: 800,
+    waitForSelector: 'body',
+    waitTime: 5000,
+    evaluate: async (page) => {
+      try {
+        await page.waitForSelector('h1', { timeout: 10000 });
+        await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+        await page.waitForTimeout(2000);
+      } catch (error) {
+        console.log('Warning: Could not fully load Summon NK D Man page');
+      }
+    }
+  },
+  {
+    name: 'virgil-ai',
+    url: 'https://virgil-ai-assistant.netlify.app/',
+    width: 1280,
+    height: 800,
+    waitForSelector: 'body',
+    waitTime: 5000,
+    evaluate: async (page) => {
+      try {
+        await page.waitForSelector('h1', { timeout: 10000 });
+        await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+        await page.waitForTimeout(2000);
+      } catch (error) {
+        console.log('Warning: Could not fully load Virgil AI Assistant page');
+      }
+    }
   }
 ];
 
@@ -65,7 +152,23 @@ async function sleep(ms) {
 
 async function captureScreenshots() {
   const browser = await chromium.launch();
-  const page = await browser.newPage();
+  const context = await browser.newContext({
+    userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+    viewport: { width: 1280, height: 800 }
+  });
+
+  // Enable request interception
+  await context.route('**/*', route => {
+    // Block unnecessary resources
+    if (route.request().resourceType() === 'image' || 
+        route.request().resourceType() === 'font' ||
+        route.request().resourceType() === 'media') {
+      return route.abort();
+    }
+    return route.continue();
+  });
+
+  const page = await context.newPage();
 
   for (const project of PROJECTS) {
     try {
@@ -77,10 +180,12 @@ async function captureScreenshots() {
         height: project.height
       });
 
-      // Navigate to the project URL
+      // Navigate to the project URL with additional options
       await page.goto(project.url, {
         waitUntil: 'networkidle',
         timeout: 30000
+      }).catch(error => {
+        console.log(`Warning: Navigation error for ${project.name}: ${error.message}`);
       });
 
       // Wait for specific element if selector is provided
@@ -91,7 +196,9 @@ async function captureScreenshots() {
 
       // Run any custom evaluation if provided
       if (project.evaluate) {
-        await project.evaluate(page);
+        await project.evaluate(page).catch(error => {
+          console.log(`Warning: Evaluation error for ${project.name}: ${error.message}`);
+        });
       }
 
       // Wait for animations and loading

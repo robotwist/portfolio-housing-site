@@ -18,6 +18,59 @@ export interface Project {
 
 const projects: Project[] = [
   {
+    id: 'instagone',
+    title: 'Instagone',
+    description: 'A Chrome extension that helps you reclaim your time and attention by removing Reels, Explore, and other distractions from Instagram mobile web.',
+    technologies: ['Chrome Extension', 'JavaScript', 'CSS', 'HTML'],
+    imageUrl: '/images/instagone.png',
+    githubUrl: 'https://github.com/robotwist/instagone',
+    liveUrl: 'https://chromewebstore.google.com/detail/cfkohckelcbibalhhmgjllhfibkbeknl',
+    upvotes: 0
+  },
+  {
+    id: 'facebook-friends-only',
+    title: 'Facebook Friends Only Mode',
+    description: 'A Chrome extension that simplifies Facebook UI to only show posts from friends and family, removing ads, suggested posts, and other distractions.',
+    technologies: ['Chrome Extension', 'JavaScript', 'CSS', 'HTML'],
+    imageUrl: '/images/facebook-friends-only.png',
+    githubUrl: 'https://github.com/robotwist/facebook-friends-only',
+    liveUrl: 'https://chromewebstore.google.com/detail/lemgnohfbnoclnblnhiadeabkmjbbilj',
+    upvotes: 0
+  },
+  {
+    id: 'linkedin-jobs-only',
+    title: 'LinkedIn Jobs Only Mode',
+    description: 'A Chrome extension that filters LinkedIn to show only job-related content, removing the feed, messages, and notifications for a focused job search experience.',
+    technologies: ['Chrome Extension', 'JavaScript', 'CSS', 'HTML'],
+    imageUrl: '/images/linkedin-jobs-only.jpg',
+    videoUrl: '/videos/linkedin-jobs-only.mp4',
+    githubUrl: 'https://github.com/robotwist/linkedin-jobs-only',
+    liveUrl: 'https://chromewebstore.google.com/detail/eojclkjofepnlmopjcpmblbkjmipipcn',
+    upvotes: 0
+  },
+  {
+    id: 'summon-nkd-man',
+    title: 'Summon NK D Man',
+    description: 'A fun Chrome extension that unleashes NK D Man onto any webpage with a four-act streaking prank animation.',
+    technologies: ['Chrome Extension', 'JavaScript', 'CSS', 'HTML'],
+    imageUrl: '/images/summon-nkd-man.png',
+    videoUrl: '/videos/summon-nkd-man.mp4',
+    githubUrl: 'https://github.com/robotwist/summon-nkd-man',
+    liveUrl: 'https://chromewebstore.google.com/detail/penadbpfpdlcikkahaniobpnoikgjfoh',
+    upvotes: 0
+  },
+  {
+    id: 'virgil-ai',
+    title: 'Virgil AI Assistant',
+    description: 'An AI-powered assistant that helps users with various tasks through natural language interaction.',
+    technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'AI/ML'],
+    imageUrl: '/images/virgil-ai.png',
+    videoUrl: '/videos/virgil-ai.mp4',
+    githubUrl: 'https://github.com/robotwist/virgil-ai-assistant',
+    liveUrl: 'https://virgil-ai-assistant.netlify.app/',
+    upvotes: 0
+  },
+  {
     id: 'authentic-internet',
     title: 'Authentic Internet Game',
     description: 'This is a standalone game that has capacity to become a social site where users exchange artifacts',
