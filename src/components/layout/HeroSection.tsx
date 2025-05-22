@@ -38,7 +38,7 @@ export default function HeroSection() {
           marginRight: 'auto',
           lineHeight: '2.25'
         }}>
-          I'm Rob, a full-stack developer with a passion for building scalable applications and AI-integrated tools. I specialize in transforming complex systems into intuitive user experiences—whether it's real-time data filtering, Chrome extension development, or full-stack ML pipelines.
+          I'm Rob. I develop much needed applications and AI-integrated tools whose concept changes the way we interact online. I specialize in transforming complex systems into intuitive user experiences—whether it's real-time data filtering, Chrome extension development, or full-stack ML pipelines.
         </p>
       </div>
       {/* Subtle background effect */}
