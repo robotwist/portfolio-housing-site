@@ -13,26 +13,26 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: '**.githubusercontent.com',
+        hostname: '**',
       },
-      {
-        protocol: 'https',
-        hostname: '**.github.com',
-      },
-      {
-        protocol: 'https',
-        hostname: '**.imgur.com',
-      },
-      {
-        protocol: 'https',
-        hostname: '**.unsplash.com',
-      }
     ],
     unoptimized: true, // This is required for static export
   },
   // Tell Next.js to use trailingSlash for compatibility
   trailingSlash: true,
   distDir: '.next',
+  experimental: {
+    optimizeCss: true,
+    optimizePackageImports: ['framer-motion', 'react-icons'],
+  },
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
+  swcMinify: true,
+  poweredByHeader: false,
+  reactStrictMode: true,
+  compress: true,
+  productionBrowserSourceMaps: false,
 }
 
 module.exports = nextConfig 

@@ -5,18 +5,36 @@ import { useEffect, useState } from 'react';
 
 export default function LoadingScreen() {
   const [isLoading, setIsLoading] = useState(true);
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
+    // Simulate loading progress
+    const interval = setInterval(() => {
+      setProgress(prev => {
+        if (prev >= 90) {
+          clearInterval(interval);
+          return 90;
+        }
+        return prev + 10;
+      });
+    }, 100);
+
     // Hide loading screen after all resources are loaded
     const handleLoad = () => {
-      setIsLoading(false);
+      setProgress(100);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 500);
     };
 
     if (document.readyState === 'complete') {
       handleLoad();
     } else {
       window.addEventListener('load', handleLoad);
-      return () => window.removeEventListener('load', handleLoad);
+      return () => {
+        window.removeEventListener('load', handleLoad);
+        clearInterval(interval);
+      };
     }
   }, []);
 
@@ -92,6 +110,18 @@ export default function LoadingScreen() {
       >
         Loading Portfolio...
       </motion.p>
+      <motion.div
+        initial={{ width: 0 }}
+        animate={{ width: `${progress}%` }}
+        transition={{ duration: 0.3 }}
+        style={{
+          marginTop: '1rem',
+          height: '4px',
+          backgroundColor: '#3b82f6',
+          borderRadius: '2px',
+          width: '200px',
+        }}
+      />
     </motion.div>
   );
 } 

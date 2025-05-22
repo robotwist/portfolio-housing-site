@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FaGithub, FaExternalLinkAlt, FaHeart, FaPlay } from 'react-icons/fa';
-import type { Project } from './ProjectsSection';
+import type { Project } from '@/types/project';
 import Image from 'next/image';
 import Link from 'next/link';
 import '@/styles/project-card.css';
@@ -28,7 +28,6 @@ export default function ProjectCard({ project, index, onUpvote }: ProjectCardPro
   const handleMouseEnter = () => {
     if (!isClient) return;
     setIsHovered(true);
-    console.log("Hovered! videoUrl:", project.videoUrl);
     if (videoRef.current && project.videoUrl) {
       videoRef.current.play().catch(error => {
         console.error("Video playback error:", error);
@@ -72,6 +71,7 @@ export default function ProjectCard({ project, index, onUpvote }: ProjectCardPro
             loop
             playsInline
             preload="metadata"
+            poster={project.imageUrl}
           >
             <source src={project.videoUrl} type="video/mp4" />
             Your browser does not support the video tag.
@@ -79,11 +79,10 @@ export default function ProjectCard({ project, index, onUpvote }: ProjectCardPro
         ) : (
           <>
             {!imageError ? (
-              // Next.js Image with proper styling
               <div style={{ position: 'relative', width: '100%', height: '100%' }}>
                 <Image
                   src={project.imageUrl}
-                  alt={project.title}
+                  alt={`${project.title} project screenshot`}
                   fill
                   style={{ objectFit: 'cover' }}
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -91,6 +90,9 @@ export default function ProjectCard({ project, index, onUpvote }: ProjectCardPro
                   loading={index < 3 ? "eager" : "lazy"}
                   decoding={index < 3 ? "sync" : "async"}
                   onError={handleImageError}
+                  quality={85}
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRoaHSQtJSEkMjU1LS0yMi4qLjgyPj4+Oj4+Oj4+Oj4+Oj4+Oj4+Oj4+Oj7/2wBDAR4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
                 />
               </div>
             ) : (
@@ -102,7 +104,6 @@ export default function ProjectCard({ project, index, onUpvote }: ProjectCardPro
           </>
         )}
         
-        {/* Video indicator */}
         {project.videoUrl && (
           <div className="video-indicator" style={{ opacity: isHovered ? 0 : 1 }}>
             <FaPlay style={{ color: 'white', fontSize: '0.75rem' }} />
@@ -154,6 +155,7 @@ export default function ProjectCard({ project, index, onUpvote }: ProjectCardPro
           <button
             onClick={handleLike}
             className={`upvote-button ${isLiked ? 'upvote-active' : ''}`}
+            aria-label={`Like ${project.title}`}
           >
             <FaHeart />
             <span>{project.upvotes}</span>
