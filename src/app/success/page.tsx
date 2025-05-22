@@ -32,41 +32,52 @@ export default function Success() {
             className="project-card"
             style={{ maxWidth: "700px", margin: "0 auto" }}
           >
-            <div className="card-content" style={{ textAlign: "center", padding: "3rem 2rem" }}>
-              <div style={{ 
-                fontSize: "4rem", 
-                marginBottom: "1.5rem",
-                color: "var(--color-secondary)"
-              }}>
-                ✅
+            <div className="card-content">
+              <div style={{ textAlign: "center", marginBottom: "2rem" }}>
+                <div style={{ 
+                  fontSize: "4rem", 
+                  marginBottom: "1rem",
+                  color: "var(--color-primary)"
+                }}>
+                  ✅
+                </div>
+                <h1 style={{ 
+                  fontSize: "2rem", 
+                  marginBottom: "1rem",
+                  color: "var(--color-foreground)"
+                }}>
+                  Message Sent Successfully!
+                </h1>
+                <p style={{ 
+                  fontSize: "1.1rem",
+                  color: "var(--color-muted-foreground)",
+                  marginBottom: "2rem"
+                }}>
+                  Thank you for reaching out. I'll get back to you as soon as possible.
+                </p>
+                <Link 
+                  href="/"
+                  style={{
+                    display: "inline-block",
+                    padding: "0.75rem 1.5rem",
+                    backgroundColor: "var(--color-primary)",
+                    color: "white",
+                    borderRadius: "0.5rem",
+                    textDecoration: "none",
+                    transition: "all 0.2s ease"
+                  }}
+                  onMouseOver={(e) => {
+                    e.currentTarget.style.backgroundColor = "var(--color-primary-hover)";
+                    e.currentTarget.style.transform = "translateY(-2px)";
+                  }}
+                  onMouseOut={(e) => {
+                    e.currentTarget.style.backgroundColor = "var(--color-primary)";
+                    e.currentTarget.style.transform = "translateY(0)";
+                  }}
+                >
+                  Return to Home
+                </Link>
               </div>
-              
-              <h1 className="card-title" style={{ 
-                fontSize: "2rem", 
-                marginBottom: "1.5rem" 
-              }}>
-                Message Received!
-              </h1>
-              
-              <p className="card-description" style={{ 
-                fontSize: "1.1rem", 
-                marginBottom: "2rem" 
-              }}>
-                Thank you for reaching out! I've received your message and will get back to you as soon as possible.
-              </p>
-              
-              <Link href="/" style={{
-                display: "inline-block",
-                padding: "0.75rem 1.5rem",
-                backgroundColor: "var(--color-primary)",
-                color: "white",
-                borderRadius: "0.5rem",
-                textDecoration: "none",
-                fontWeight: "500",
-                transition: "all 0.2s ease",
-              }}>
-                Back to Homepage
-              </Link>
             </div>
           </motion.div>
         </div>
