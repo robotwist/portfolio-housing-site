@@ -5,9 +5,6 @@
 [build.environment]
   NEXT_TELEMETRY_DISABLED = "1"
 
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
-
 [[headers]]
   for = "/*"
   [headers.values]
@@ -16,18 +13,10 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
 
-# Since we're using static export, we don't need the Next.js plugin
-# [[plugins]]
-#  package = "@netlify/plugin-nextjs"
-
-# Make sure all routes are handled correctly with SPA fallback
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-
-# No need for special redirects for static assets in static export
-# as they're already in the correct location
 
 [build.processing]
   skip_processing = false

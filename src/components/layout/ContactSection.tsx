@@ -61,23 +61,11 @@ export default function ContactSection() {
 
     try {
       if (isNetlify) {
-        // On Netlify, encode the form data
+        // On Netlify, the form will be handled automatically
         const form = e.target as HTMLFormElement;
-        const formData = new FormData(form);
-        const encodedData = new URLSearchParams(formData as any).toString();
-
-        const response = await fetch('/', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: encodedData,
-        });
-
-        if (response.ok) {
-          setStatus('success');
-          setFormData({ name: '', email: '', message: '' });
-        } else {
-          throw new Error('Failed to submit form');
-        }
+        form.submit();
+        // Note: We don't actually reach this point since the form is submitted to Netlify
+        setStatus('success');
       } else {
         // In development, use our API route
         const response = await fetch('/api/contact', {
