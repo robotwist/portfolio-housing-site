@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "@/styles/globals.css";
 import LoadingScreen from "@/components/ui/LoadingScreen";
 
-export const viewport: Viewport = {
+export const viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
@@ -12,8 +12,6 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: 'Portfolio Housing Site',
   description: 'A showcase of housing and real estate projects',
-  viewport: "width=device-width, initial-scale=1, maximum-scale=1",
-  themeColor: "#0d1117",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
