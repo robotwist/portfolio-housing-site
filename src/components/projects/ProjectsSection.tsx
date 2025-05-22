@@ -86,7 +86,7 @@ const projects: Project[] = [
     description: 'An AI-powered content analysis tool that helps you identify fake news.',
     technologies: ['Python', 'Flask', 'TensorFlow', 'React', 'AWS'],
     imageUrl: '/images/authentic-reader-screenshot.png',
-    videoUrl: '/videos/authentic-demo.mp4',
+    videoUrl: '/videos/authentic-reader.mp4',
     githubUrl: 'https://github.com/username/authentic-reader',
     liveUrl: 'https://authentic-reader.vercel.app',
     upvotes: 15
@@ -97,6 +97,7 @@ const projects: Project[] = [
     description: 'An admin dashboard for the Authentic Reader platform.',
     technologies: ['React', 'TypeScript', 'Material UI', 'D3.js', 'Redux'],
     imageUrl: '/images/authentic-dashboard.png',
+    videoUrl: '/videos/authentic-dashboard.mp4',
     githubUrl: 'https://github.com/robotwist/authentic-dashboard',
     liveUrl: 'https://dashboard.authentic-reader.vercel.app',
     upvotes: 9
@@ -112,7 +113,6 @@ const projects: Project[] = [
     liveUrl: 'https://ledgerline-a661b98ef7f7.herokuapp.com/',
     upvotes: 8
   },
-  
   {
     id: 'coin-flip',
     title: 'Coin Flip Game',
@@ -136,18 +136,34 @@ const projects: Project[] = [
 ];
 
 export default function ProjectsSection() {
-  const [projectsData, setProjectsData] = useState<Project[]>([]);
+  const [projectsData, setProjectsData] = useState<Project[]>(projects);
+  const [isClient, setIsClient] = useState(false);
   
   useEffect(() => {
-    const storedProjects = localStorage.getItem('portfolio-projects');
-    if (storedProjects) {
-      setProjectsData(JSON.parse(storedProjects));
-    } else {
-      setProjectsData(projects);
+    setIsClient(true);
+    // Only try to load from localStorage on the client side
+    if (typeof window !== 'undefined') {
+      const storedProjects = localStorage.getItem('portfolio-projects');
+      if (storedProjects) {
+        try {
+          const parsedProjects = JSON.parse(storedProjects);
+          // Ensure all projects exist in the parsed data
+          const mergedProjects = projects.map(project => {
+            const storedProject = parsedProjects.find((p: Project) => p.id === project.id);
+            return storedProject || project;
+          });
+          setProjectsData(mergedProjects);
+        } catch (error) {
+          console.error('Error parsing stored projects:', error);
+          setProjectsData(projects);
+        }
+      }
     }
   }, []);
 
   const handleUpvote = (id: string) => {
+    if (!isClient) return;
+    
     const updatedProjects = projectsData.map(project => 
       project.id === id 
         ? { ...project, upvotes: project.upvotes + 1 } 

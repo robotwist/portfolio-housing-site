@@ -216,7 +216,7 @@ export default function PongGameCard({ width = 400, height = 300, className = ''
       <div className="card-content">
         <h3 className="card-title">Pong Game</h3>
         <p className="card-description" style={{ textAlign: "center" }}>
-          Take a break and enjoy a classic game of Pong. Currently in {demoMode ? 'demo mode' : 'play mode'}.
+          Take a break and enjoy a classic game of Pong,  two-player for historical accuracy. Currently in {demoMode ? 'demo mode' : 'play mode'}.
         </p>
         
         <div 
