@@ -1,6 +1,6 @@
 [build]
   command = "npm run build"
-  publish = ".next"
+  publish = "out"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
@@ -8,7 +8,7 @@
 [build.environment]
   NEXT_USE_NETLIFY_EDGE = "true"
 
-# Make sure public files can be accessed
+# Make sure all routes are handled correctly with SPA fallback
 [[redirects]]
   from = "/*"
   to = "/index.html"

@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export',  // Enable static export
   images: {
     domains: [
       'placehold.co',
@@ -27,21 +28,10 @@ const nextConfig = {
         hostname: '**.unsplash.com',
       }
     ],
-    unoptimized: true, // This helps with Netlify deployments
+    unoptimized: true, // This is required for static export
   },
-  // Ensure static assets in the public directory are properly served
-  async rewrites() {
-    return [
-      {
-        source: '/images/:path*',
-        destination: '/public/images/:path*',
-      },
-      {
-        source: '/videos/:path*',
-        destination: '/public/videos/:path*',
-      },
-    ]
-  },
+  // Static exports don't support rewrites, so we'll rely on the file structure
+  // Remove the rewrites section
 }
 
 module.exports = nextConfig 
