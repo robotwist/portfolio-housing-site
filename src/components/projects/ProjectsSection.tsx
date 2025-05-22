@@ -2,138 +2,17 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import ProjectCard from './ProjectCard';
+import dynamic from 'next/dynamic';
+import { projects } from '@/data/projects';
+import { Project } from '@/types/project';
 
-export interface Project {
-  id: string;
-  title: string;
-  description: string;
-  technologies: string[];
-  imageUrl: string;
-  videoUrl?: string;
-  githubUrl: string;
-  liveUrl: string;
-  upvotes: number;
-}
-
-const projects: Project[] = [
-  {
-    id: 'instagone',
-    title: 'Instagone',
-    description: 'A Chrome extension that helps you reclaim your time and attention by removing Reels, Explore, and other distractions from Instagram mobile web.',
-    technologies: ['Chrome Extension', 'JavaScript', 'CSS', 'HTML'],
-    imageUrl: '/images/instagone.png',
-    githubUrl: 'https://github.com/robotwist/instagone',
-    liveUrl: 'https://chromewebstore.google.com/detail/cfkohckelcbibalhhmgjllhfibkbeknl',
-    upvotes: 0
-  },
-  {
-    id: 'facebook-friends-only',
-    title: 'Facebook Friends Only Mode',
-    description: 'A Chrome extension that simplifies Facebook UI to only show posts from friends and family, removing ads, suggested posts, and other distractions.',
-    technologies: ['Chrome Extension', 'JavaScript', 'CSS', 'HTML'],
-    imageUrl: '/images/facebook-friends-only.png',
-    githubUrl: 'https://github.com/robotwist/facebook-friends-only',
-    liveUrl: 'https://chromewebstore.google.com/detail/lemgnohfbnoclnblnhiadeabkmjbbilj',
-    upvotes: 0
-  },
-  {
-    id: 'linkedin-jobs-only',
-    title: 'LinkedIn Jobs Only Mode',
-    description: 'A Chrome extension that filters LinkedIn to show only job-related content, removing the feed, messages, and notifications for a focused job search experience.',
-    technologies: ['Chrome Extension', 'JavaScript', 'CSS', 'HTML'],
-    imageUrl: '/images/linkedin-jobs-only.jpg',
-    videoUrl: '/videos/linkedin-jobs-only.mp4',
-    githubUrl: 'https://github.com/robotwist/linkedin-jobs-only',
-    liveUrl: 'https://chromewebstore.google.com/detail/eojclkjofepnlmopjcpmblbkjmipipcn',
-    upvotes: 0
-  },
-  {
-    id: 'summon-nkd-man',
-    title: 'Summon NK D Man',
-    description: 'A fun Chrome extension that unleashes NK D Man onto any webpage with a four-act streaking prank animation.',
-    technologies: ['Chrome Extension', 'JavaScript', 'CSS', 'HTML'],
-    imageUrl: '/images/summon-nkd-man.png',
-    videoUrl: '/videos/summon-nkd-man.mp4',
-    githubUrl: 'https://github.com/robotwist/summon-nkd-man',
-    liveUrl: 'https://chromewebstore.google.com/detail/penadbpfpdlcikkahaniobpnoikgjfoh',
-    upvotes: 0
-  },
-  {
-    id: 'virgil-ai',
-    title: 'Virgil AI Assistant',
-    description: 'An AI-powered assistant that helps users with various tasks through natural language interaction.',
-    technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'AI/ML'],
-    imageUrl: '/images/virgil-ai.png',
-    videoUrl: '/videos/virgil-ai.mp4',
-    githubUrl: 'https://github.com/robotwist/virgil-ai-assistant',
-    liveUrl: 'https://virgil-ai-assistant.netlify.app/',
-    upvotes: 0
-  },
-  {
-    id: 'authentic-internet',
-    title: 'Authentic Internet Game',
-    description: 'This is a standalone game that has capacity to become a social site where users exchange artifacts',
-    technologies: ['Next.js', 'React', 'CSS'],
-    imageUrl: '/images/authentic-internet.png',
-    githubUrl: 'https://github.com/robotwist/authentic-internet',
-    liveUrl: 'https://flourishing-starburst-8cf88b.netlify.app/',
-    upvotes: 17
-  },
-  {
-    id: 'authentic-reader',
-    title: 'Authentic Reader',
-    description: 'An AI-powered content analysis tool that helps you identify fake news.',
-    technologies: ['Python', 'Flask', 'TensorFlow', 'React', 'AWS'],
-    imageUrl: '/images/authentic-reader-screenshot.png',
-    videoUrl: '/videos/authentic-reader.mp4',
-    githubUrl: 'https://github.com/username/authentic-reader',
-    liveUrl: 'https://authentic-reader.vercel.app',
-    upvotes: 15
-  },
-  {
-    id: 'authentic-dashboard',
-    title: 'Authentic Dashboard',
-    description: 'An admin dashboard for the Authentic Reader platform.',
-    technologies: ['React', 'TypeScript', 'Material UI', 'D3.js', 'Redux'],
-    imageUrl: '/images/authentic-dashboard.png',
-    videoUrl: '/videos/authentic-dashboard.mp4',
-    githubUrl: 'https://github.com/robotwist/authentic-dashboard',
-    liveUrl: 'https://dashboard.authentic-reader.vercel.app',
-    upvotes: 9
-  },
-  {
-    id: 'ledgerline',
-    title: 'LedgerLine',
-    description: 'A modern accounting platform built with React and Node.js.',
-    technologies: ['React', 'Node.js', 'Express', 'MongoDB', 'Tailwind'],
-    imageUrl: '/images/Ledgerline-Opening.png',
-    videoUrl: '/videos/ledgerline-demo.mp4', 
-    githubUrl: 'https://github.com/robotwist/Ledgerline',
-    liveUrl: 'https://ledgerline-a661b98ef7f7.herokuapp.com/',
-    upvotes: 8
-  },
-  {
-    id: 'coin-flip',
-    title: 'Coin Flip Game',
-    description: 'A simple yet addictive coin flipping game with leaderboards.',
-    technologies: ['JavaScript', 'HTML', 'CSS', 'Firebase'],
-    imageUrl: '/images/Coin-Flip.png',
-    githubUrl: 'https://github.com/robotwist/Coin-Flip-Game-Project-One-GA',
-    liveUrl: 'https://robotwist.github.io/Coin-Flip-Game-Project-One-GA/',
-    upvotes: 5
-  },
-  {
-    id: '100m-dash',
-    title: '100 Meter Dash',
-    description: 'A fun keyboard mashing game inspired by old school olympics games.',
-    technologies: ['JavaScript', 'HTML Canvas', 'CSS'],
-    imageUrl: '/images/100-meter-dash.jpg',
-    githubUrl: 'https://github.com/robotwist/100-meter-dash',
-    liveUrl: 'https://robotwist.github.io/100-meter-dash/',
-    upvotes: 7
-  }
-];
+// Dynamically import ProjectCard with no SSR for better performance
+const ProjectCard = dynamic(() => import('./ProjectCard'), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-64 bg-gray-800 rounded-lg animate-pulse" />
+  ),
+});
 
 export default function ProjectsSection() {
   const [projectsData, setProjectsData] = useState<Project[]>(projects);
@@ -141,22 +20,18 @@ export default function ProjectsSection() {
   
   useEffect(() => {
     setIsClient(true);
-    // Only try to load from localStorage on the client side
-    if (typeof window !== 'undefined') {
-      const storedProjects = localStorage.getItem('portfolio-projects');
-      if (storedProjects) {
-        try {
-          const parsedProjects = JSON.parse(storedProjects);
-          // Ensure all projects exist in the parsed data
-          const mergedProjects = projects.map(project => {
-            const storedProject = parsedProjects.find((p: Project) => p.id === project.id);
-            return storedProject || project;
-          });
-          setProjectsData(mergedProjects);
-        } catch (error) {
-          console.error('Error parsing stored projects:', error);
-          setProjectsData(projects);
-        }
+    const savedProjects = localStorage.getItem('projects');
+    if (savedProjects) {
+      try {
+        const parsedProjects = JSON.parse(savedProjects);
+        // Merge saved projects with static projects to ensure all are displayed
+        const mergedProjects = projects.map((project: Project) => {
+          const savedProject = parsedProjects.find((p: Project) => p.id === project.id);
+          return savedProject || project;
+        });
+        setProjectsData(mergedProjects);
+      } catch (error) {
+        console.error('Error parsing saved projects:', error);
       }
     }
   }, []);
@@ -173,6 +48,16 @@ export default function ProjectsSection() {
     setProjectsData(updatedProjects);
     localStorage.setItem('portfolio-projects', JSON.stringify(updatedProjects));
   };
+
+  if (!isClient) {
+    return (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {[...Array(6)].map((_, i) => (
+          <div key={i} className="w-full h-64 bg-gray-800 rounded-lg animate-pulse" />
+        ))}
+      </div>
+    );
+  }
 
   return (
     <section id="projects" className="section">

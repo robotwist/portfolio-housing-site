@@ -88,6 +88,8 @@ export default function ProjectCard({ project, index, onUpvote }: ProjectCardPro
                   style={{ objectFit: 'cover' }}
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   priority={index < 3}
+                  loading={index < 3 ? "eager" : "lazy"}
+                  decoding={index < 3 ? "sync" : "async"}
                   onError={handleImageError}
                 />
               </div>

@@ -1,1 +1,1 @@
-self.__REACT_LOADABLE_MANIFEST="{}"
+self.__REACT_LOADABLE_MANIFEST="{\"components/projects/ProjectsSection.tsx -> ./ProjectCard\":{\"id\":\"components/projects/ProjectsSection.tsx -> ./ProjectCard\",\"files\":[\"static/css/_app-pages-browser_src_components_projects_ProjectCard_tsx.css\",\"static/chunks/_app-pages-browser_src_components_projects_ProjectCard_tsx.js\"]}}"
