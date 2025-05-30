@@ -20,6 +20,7 @@ export default function ProjectCard({ project, index, onUpvote }: ProjectCardPro
   const [imageError, setImageError] = useState(false);
   const [isClient, setIsClient] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const isTouchDevice = typeof window !== 'undefined' && 'ontouchstart' in window;
 
   useEffect(() => {
     setIsClient(true);
@@ -36,6 +37,25 @@ export default function ProjectCard({ project, index, onUpvote }: ProjectCardPro
   };
 
   const handleMouseLeave = () => {
+    if (!isClient) return;
+    setIsHovered(false);
+    if (videoRef.current && project.videoUrl) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+    }
+  };
+
+  const handleTouchStart = () => {
+    if (!isClient) return;
+    setIsHovered(true);
+    if (videoRef.current && project.videoUrl) {
+      videoRef.current.play().catch(error => {
+        console.error("Video playback error:", error);
+      });
+    }
+  };
+
+  const handleTouchEnd = () => {
     if (!isClient) return;
     setIsHovered(false);
     if (videoRef.current && project.videoUrl) {
@@ -61,6 +81,8 @@ export default function ProjectCard({ project, index, onUpvote }: ProjectCardPro
       className="project-card"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
       role="article"
       aria-labelledby={`project-title-${project.id}`}
     >
@@ -92,12 +114,12 @@ export default function ProjectCard({ project, index, onUpvote }: ProjectCardPro
                   alt={`${project.title} project screenshot`}
                   fill
                   style={{ objectFit: 'cover' }}
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                   priority={index < 3}
                   loading={index < 3 ? "eager" : "lazy"}
                   decoding={index < 3 ? "sync" : "async"}
                   onError={handleImageError}
-                  quality={85}
+                  quality={75}
                   placeholder="blur"
                   blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRoaHSQtJSEkMjU1LS0yMi4qLjgyPj4+Oj4+Oj4+Oj4+Oj4+Oj4+Oj4+Oj7/2wBDAR4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
                 />

@@ -1,30 +1,16 @@
 "use client";
 
-import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
 export default function LoadingScreen() {
   const [isLoading, setIsLoading] = useState(true);
-  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    // Simulate loading progress
-    const interval = setInterval(() => {
-      setProgress(prev => {
-        if (prev >= 90) {
-          clearInterval(interval);
-          return 90;
-        }
-        return prev + 10;
-      });
-    }, 100);
-
     // Hide loading screen after all resources are loaded
     const handleLoad = () => {
-      setProgress(100);
       setTimeout(() => {
         setIsLoading(false);
-      }, 500);
+      }, 1000);
     };
 
     if (document.readyState === 'complete') {
@@ -33,7 +19,6 @@ export default function LoadingScreen() {
       window.addEventListener('load', handleLoad);
       return () => {
         window.removeEventListener('load', handleLoad);
-        clearInterval(interval);
       };
     }
   }, []);
@@ -41,10 +26,7 @@ export default function LoadingScreen() {
   if (!isLoading) return null;
 
   return (
-    <motion.div
-      initial={{ opacity: 1 }}
-      animate={{ opacity: 0 }}
-      transition={{ duration: 0.5, delay: 0.5 }}
+    <div
       style={{
         position: 'fixed',
         top: 0,
@@ -59,48 +41,21 @@ export default function LoadingScreen() {
         zIndex: 9999,
       }}
     >
-      <motion.div
-        initial={{ scale: 0.8, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 0.5 }}
+      <div
         style={{
-          width: '120px',
-          height: '120px',
+          width: '80px',
+          height: '80px',
           borderRadius: '50%',
-          background: 'linear-gradient(45deg, #3b82f6, #22d3ee, #22c55e)',
+          backgroundColor: '#3b82f6',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          boxShadow: '0 0 20px rgba(59, 130, 246, 0.5)',
+          animation: 'spin 1s linear infinite',
         }}
       >
-        <motion.div
-          animate={{
-            scale: [1, 1.2, 1],
-            rotate: [0, 360],
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          style={{
-            width: '100px',
-            height: '100px',
-            borderRadius: '50%',
-            backgroundColor: '#0d1117',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <span style={{ fontSize: '2rem' }}>🚀</span>
-        </motion.div>
-      </motion.div>
-      <motion.p
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3 }}
+        <span style={{ fontSize: '2rem' }}>🚀</span>
+      </div>
+      <p
         style={{
           marginTop: '2rem',
           color: '#e6edf3',
@@ -109,19 +64,13 @@ export default function LoadingScreen() {
         }}
       >
         Loading Portfolio...
-      </motion.p>
-      <motion.div
-        initial={{ width: 0 }}
-        animate={{ width: `${progress}%` }}
-        transition={{ duration: 0.3 }}
-        style={{
-          marginTop: '1rem',
-          height: '4px',
-          backgroundColor: '#3b82f6',
-          borderRadius: '2px',
-          width: '200px',
-        }}
-      />
-    </motion.div>
+      </p>
+      <style jsx>{`
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+      `}</style>
+    </div>
   );
 } 

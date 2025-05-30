@@ -229,4 +229,47 @@ async function captureScreenshots() {
   console.log('Screenshot capture complete!');
 }
 
+const screenshotDir = path.join(__dirname, '../public/screenshots');
+
+// Ensure screenshots directory exists
+if (!fs.existsSync(screenshotDir)) {
+  fs.mkdirSync(screenshotDir, { recursive: true });
+}
+
+async function captureScreenshot() {
+  const browser = await chromium.launch();
+  const context = await browser.newContext({
+    viewport: { width: 1280, height: 720 },
+    deviceScaleFactor: 1,
+  });
+
+  const page = await context.newPage();
+  
+  try {
+    // Navigate to the local development server
+    await page.goto('http://localhost:3000', {
+      waitUntil: 'networkidle',
+      timeout: 30000
+    });
+
+    // Wait for the main content to load
+    await page.waitForSelector('#main-content', { timeout: 10000 });
+
+    // Take the screenshot
+    await page.screenshot({
+      path: path.join(screenshotDir, 'home.png'),
+      fullPage: true,
+      type: 'png',
+    });
+
+    console.log('Screenshot captured successfully!');
+  } catch (error) {
+    console.error('Error capturing screenshot:', error);
+  } finally {
+    await browser.close();
+  }
+}
+
+captureScreenshot();
+
 captureScreenshots().catch(console.error); 

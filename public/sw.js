@@ -7,18 +7,26 @@ const STATIC_ASSETS = [
   '/index.html',
   '/manifest.json',
   '/styles/globals.css',
-  '/images/logo.png',
+  '/images/TruthRayLogo.png',
   '/icons/icon-192x192.png',
   '/icons/icon-512x512.png',
   '/fonts/inter-var.woff2',
 ];
 
-// Cache static assets on install
+// Add debug logging
 self.addEventListener('install', (event) => {
+  console.log('Service Worker installing...');
   event.waitUntil(
     caches.open(STATIC_CACHE)
       .then((cache) => {
+        console.log('Caching static assets...');
         return cache.addAll(STATIC_ASSETS);
+      })
+      .then(() => {
+        console.log('Static assets cached successfully');
+      })
+      .catch((error) => {
+        console.error('Error caching static assets:', error);
       })
   );
 });
@@ -70,22 +78,26 @@ const cacheFirst = async (request) => {
 // Handle fetch events
 self.addEventListener('fetch', (event) => {
   const request = event.request;
+  console.log('Fetching:', request.url);
   
   // Skip non-GET requests
   if (request.method !== 'GET') return;
 
   // Handle HTML pages with network-first strategy
   if (request.headers.get('accept').includes('text/html')) {
+    console.log('Handling HTML request:', request.url);
     event.respondWith(networkFirst(request));
     return;
   }
 
   // Handle static assets with cache-first strategy
   if (request.url.match(/\.(js|css|png|jpg|jpeg|gif|svg|ico|woff2)$/)) {
+    console.log('Handling static asset:', request.url);
     event.respondWith(cacheFirst(request));
     return;
   }
 
   // Default to network-first for other requests
+  console.log('Handling default request:', request.url);
   event.respondWith(networkFirst(request));
 }); 

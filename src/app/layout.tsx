@@ -2,6 +2,13 @@ import type { Metadata, Viewport } from "next";
 import "@/styles/globals.css";
 import LoadingScreen from "@/components/ui/LoadingScreen";
 import SkipLink from "@/components/ui/SkipLink";
+import { Inter } from 'next/font/google';
+
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
+});
 
 export const viewport = {
   width: "device-width",
@@ -22,6 +29,9 @@ export const metadata: Metadata = {
   formatDetection: {
     telephone: false,
   },
+  other: {
+    'Content-Security-Policy': "default-src 'self' https:; style-src 'self' 'unsafe-inline' https:; font-src 'self' https: data:; img-src 'self' data: https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; connect-src 'self' https:;"
+  }
 };
 
 export default function RootLayout({
@@ -30,7 +40,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={inter.variable}>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
         <meta name="theme-color" content="#0d1117" />
@@ -54,10 +64,10 @@ export default function RootLayout({
                     scope: '/'
                   }).then(
                     function(registration) {
-                      console.log('ServiceWorker registration successful');
+                      console.log('ServiceWorker registration successful with scope: ', registration.scope);
                     },
                     function(err) {
-                      console.log('ServiceWorker registration failed: ', err);
+                      console.error('ServiceWorker registration failed: ', err);
                     }
                   );
                 });
@@ -70,7 +80,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body>
+      <body className={inter.className}>
         <SkipLink />
         <LoadingScreen />
         <div role="main" id="main-content" tabIndex={-1}>

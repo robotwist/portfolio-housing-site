@@ -3,12 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Offline - Portfolio Housing Site</title>
+    <title>Offline - Portfolio</title>
     <style>
         body {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: #0d1117;
-            color: #e6edf3;
+            font-family: system-ui, -apple-system, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -17,43 +15,36 @@
             margin: 0;
             padding: 20px;
             text-align: center;
+            background: #f5f5f5;
         }
         .container {
             max-width: 600px;
+            padding: 40px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
-        h1 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-        p {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 2rem;
-        }
-        .emoji {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-        }
-        .button {
-            background-color: #3b82f6;
+        h1 { color: #333; }
+        p { color: #666; }
+        .retry {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #0070f3;
             color: white;
-            padding: 12px 24px;
+            border: none;
             border-radius: 6px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: background-color 0.2s;
+            cursor: pointer;
         }
-        .button:hover {
-            background-color: #2563eb;
+        .retry:hover {
+            background: #0051a8;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="emoji">📡</div>
         <h1>You're Offline</h1>
-        <p>Don't worry! You can still access previously viewed content. Check your internet connection and try again.</p>
-        <a href="/" class="button">Try Again</a>
+        <p>Please check your internet connection and try again.</p>
+        <button class="retry" onclick="window.location.reload()">Retry</button>
     </div>
 </body>
 </html> 
