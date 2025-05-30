@@ -71,8 +71,8 @@ export const projects: Project[] = [
     technologies: ["Python", "Flask", "TensorFlow", "React", "AWS"],
     imageUrl: "/images/authentic-reader-screenshot.png",
     videoUrl: "/videos/authentic-reader.mp4",
-    githubUrl: "https://github.com/username/authentic-reader",
-    liveUrl: "https://authentic-reader.vercel.app",
+    githubUrl: "https://github.com/robotwist/authentic-reader",
+    liveUrl: "https://authentic-reader.netlify.app",
     upvotes: 15
   },
   {
@@ -83,7 +83,7 @@ export const projects: Project[] = [
     imageUrl: "/images/authentic-dashboard.png",
     videoUrl: "/videos/authentic-dashboard.mp4",
     githubUrl: "https://github.com/robotwist/authentic-dashboard",
-    liveUrl: "https://dashboard.authentic-reader.vercel.app",
+    liveUrl: "https://dashboard.authentic-reader.netlify.app",
     upvotes: 9
   },
   {

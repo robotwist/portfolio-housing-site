@@ -39,8 +39,6 @@ export default function RootLayout({
         
         {/* Preload critical assets */}
         <link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-        <link rel="preload" href="/styles/globals.css" as="style" />
-        <link rel="preload" href="/images/logo.png" as="image" />
         
         {/* PWA related tags */}
         <link rel="manifest" href="/manifest.json" />
