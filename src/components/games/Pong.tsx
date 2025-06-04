@@ -57,13 +57,19 @@ export const Pong: React.FC<PongProps> = (props) => {
       newBall.y += newBall.dy;
 
       // Ball collision with top and bottom
-      if (newBall.y <= 0 || newBall.y >= 300) newBall.dy *= -1;
+      if (newBall.y - newBall.radius <= 0 || newBall.y + newBall.radius >= 300) {
+        newBall.dy *= -1;
+      }
 
       // Ball collision with paddles
-      if (newBall.x <= 20 && newBall.y >= newPaddle1.y && newBall.y <= newPaddle1.y + newPaddle1.height) {
+      if (newBall.x - newBall.radius <= 20 && 
+          newBall.y >= newPaddle1.y && 
+          newBall.y <= newPaddle1.y + newPaddle1.height) {
         newBall.dx *= -1;
       }
-      if (newBall.x >= 380 && newBall.y >= newPaddle2.y && newBall.y <= newPaddle2.y + newPaddle2.height) {
+      if (newBall.x + newBall.radius >= 380 && 
+          newBall.y >= newPaddle2.y && 
+          newBall.y <= newPaddle2.y + newPaddle2.height) {
         newBall.dx *= -1;
       }
 

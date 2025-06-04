@@ -10,6 +10,11 @@
   display: flex;
   flex-direction: column;
 }
+.project-card label {
+  margin-top: 1rem !important;
+  margin-bottom: .75rem !important;  /* Override any other margin settings */
+  display: block;
+}
 
 .project-card:hover {
   transform: translateY(-5px);
@@ -129,7 +134,7 @@
   justify-content: space-between;
   align-items: center;
   margin-top: 1rem;
-  padding-top: 1rem;
+  padding: 1.5rem;
   border-top: 1px solid var(--color-border);
 }
 
@@ -192,4 +197,9 @@
   .projects-grid {
     grid-template-columns: repeat(3, 1fr);
   }
+}
+
+.project-demo-modal {
+  /* No extra styles needed if you use the inline styles above,
+     but you can add animation or z-index here if desired */
 } 

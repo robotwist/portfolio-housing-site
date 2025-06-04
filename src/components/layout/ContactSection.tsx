@@ -193,7 +193,7 @@ export default function ContactSection() {
                     required
                     style={{
                       width: "100%",
-                      padding: "0.75rem 1rem",
+                      padding: ".75rem 1rem",
                       backgroundColor: "var(--color-card-hover)",
                       border: "1px solid var(--color-border)",
                       borderRadius: "0.5rem",
