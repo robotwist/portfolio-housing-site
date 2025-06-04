@@ -12,6 +12,7 @@
     "prepare-pwa": "npm run generate-icons && npm run capture-screenshot"
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.4",
     "@netlify/functions": "^3.1.8",
     "@netlify/plugin-nextjs": "^5.11.2",
     "critters": "^0.0.23",

@@ -72,7 +72,7 @@ export const projects: Project[] = [
     imageUrl: "/images/authentic-reader-screenshot.png",
     videoUrl: "/videos/authentic-reader.mp4",
     githubUrl: "https://github.com/robotwist/authentic-reader",
-    liveUrl: "https://authentic-reader.netlify.app",
+    liveUrl: "",
     upvotes: 15
   },
   {
@@ -83,7 +83,7 @@ export const projects: Project[] = [
     imageUrl: "/images/authentic-dashboard.png",
     videoUrl: "/videos/authentic-dashboard.mp4",
     githubUrl: "https://github.com/robotwist/authentic-dashboard",
-    liveUrl: "https://dashboard.authentic-reader.netlify.app",
+    liveUrl: "",
     upvotes: 9
   },
   {
@@ -92,7 +92,7 @@ export const projects: Project[] = [
     description: "A modern accounting platform built with React and Node.js.",
     technologies: ["React", "Node.js", "Express", "MongoDB", "Tailwind"],
     imageUrl: "/images/Ledgerline-Opening.png",
-    videoUrl: "/videos/ledgerline-demo.mp4",
+    videoUrl: "",
     githubUrl: "https://github.com/robotwist/Ledgerline",
     liveUrl: "https://ledgerline-a661b98ef7f7.herokuapp.com/",
     upvotes: 8
