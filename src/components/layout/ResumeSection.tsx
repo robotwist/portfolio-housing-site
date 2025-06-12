@@ -6,6 +6,11 @@ import { FaDownload, FaFilePdf } from 'react-icons/fa';
 
 export default function ResumeSection() {
   const [isHovered, setIsHovered] = useState(false);
+  const [pdfError, setPdfError] = useState(false);
+
+  const handlePdfError = () => {
+    setPdfError(true);
+  };
 
   return (
     <section id="resume" style={{
@@ -71,15 +76,53 @@ export default function ResumeSection() {
             borderRadius: '0.5rem',
             overflow: 'hidden'
           }}>
-            <iframe
-              src="/documents/LogoShotResumeJune11-25.docx.pdf"
-              style={{
-                width: '100%',
+            {!pdfError ? (
+              <iframe
+                src="/documents/LogoShotResumeJune11-25.docx.pdf"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  border: 'none'
+                }}
+                title="Resume Preview"
+                onError={handlePdfError}
+              />
+            ) : (
+              <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
                 height: '100%',
-                border: 'none'
-              }}
-              title="Resume Preview"
-            />
+                padding: '2rem',
+                textAlign: 'center'
+              }}>
+                <FaFilePdf style={{ fontSize: '3rem', color: 'var(--color-primary)', marginBottom: '1rem' }} />
+                <h3 style={{ marginBottom: '1rem' }}>Resume Preview Unavailable</h3>
+                <p style={{ marginBottom: '1.5rem' }}>
+                  Please use the download button above to view my resume.
+                </p>
+                <a
+                  href="/documents/LogoShotResumeJune11-25.docx.pdf"
+                  download
+                  className="download-button"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    padding: '0.75rem 1.5rem',
+                    background: 'var(--color-primary)',
+                    color: 'white',
+                    borderRadius: '0.5rem',
+                    textDecoration: 'none',
+                    transition: 'transform 0.2s'
+                  }}
+                >
+                  <FaDownload />
+                  <span>Download Resume</span>
+                </a>
+              </div>
+            )}
           </div>
 
           <div style={{
