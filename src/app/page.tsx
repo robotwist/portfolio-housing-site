@@ -9,6 +9,7 @@ import ContactSection from '@/components/layout/ContactSection';
 import AIChat, { AIChatHandle } from '@/components/ui/AIChat';
 import TechScroll from '@/components/ui/TechScroll';
 import PongGameCard from '@/components/games/PongGameCard';
+import ResumeSection from '@/components/layout/ResumeSection';
 
 export default function Home() {
   const [isChatOpen, setIsChatOpen] = useState(false);
@@ -41,6 +42,9 @@ export default function Home() {
     <main style={{ minHeight: '100vh' }}>
       <Header toggleChat={handleToggleChat} />
       <HeroSection />
+      
+      {/* Resume Section */}
+      <ResumeSection />
       
       {/* Tech Scroll Section - Desktop Only */}
       {!isMobile && (

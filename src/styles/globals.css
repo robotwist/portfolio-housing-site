@@ -334,4 +334,25 @@ section {
   }
 }
 
-/* Add any other global styles as needed */ 
+/* Add any other global styles as needed */
+.resume-card {
+  transition: transform 0.3s ease;
+}
+
+.resume-card:hover {
+  transform: translateY(-5px);
+}
+
+.download-button:hover {
+  background: var(--color-primary-dark) !important;
+}
+
+@media (max-width: 768px) {
+  .resume-card {
+    padding: 1rem;
+  }
+  
+  .resume-card iframe {
+    height: 400px;
+  }
+} 
