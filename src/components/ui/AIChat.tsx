@@ -15,16 +15,23 @@ export interface AIChatHandle {
 
 const AIChat = forwardRef<AIChatHandle, {}>((props, ref) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([
-    { 
-      role: 'assistant', 
-      content: "Hi there! I'm Rob's portfolio assistant. What would you like to know about his work or experience?" 
-    }
-  ]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+
+  // Handle initial mount
+  useEffect(() => {
+    setIsMounted(true);
+    setMessages([
+      { 
+        role: 'assistant', 
+        content: "Hi there! I'm Rob's portfolio assistant. What would you like to know about his work or experience?" 
+      }
+    ]);
+  }, []);
 
   // Expose the toggleChat method to the parent component
   useImperativeHandle(ref, () => ({
@@ -81,6 +88,11 @@ const AIChat = forwardRef<AIChatHandle, {}>((props, ref) => {
       setIsLoading(false);
     }
   };
+
+  // Don't render anything until after mount
+  if (!isMounted) {
+    return null;
+  }
 
   return (
     <>
