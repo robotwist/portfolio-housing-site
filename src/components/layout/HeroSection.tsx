@@ -38,7 +38,7 @@ export default function HeroSection() {
           marginRight: 'auto',
           lineHeight: '2.25'
         }}>
-          I'm Rob. Scroll to my projects. Click them. Download the Chrome extensions. I can confidently say that they work and are useful. My games are fun: 100 Meter Mash, mash buttons to see who is the fastest in the galaxy. Authentic Internet houses the best that 8 bit music has to offer with four condensed levels including the delightful Hemingway Text Adventure. Coin Flip is the simplest game on earth featuring a showdown with the most dastardly villain of them all, your mother. I have AI-integrated tools. They focus on network theory, multi-dimensional bias with real-time data filtering and full-stack ML pipelines. I would love to show you a video demo of my AI filtering tools.
+          I'm Rob. Scroll to my projects. Click them. Download the Chrome extensions. They are useful. My games are fun: 100 Meter Mash, mash buttons to see who is the fastest in the galaxy. Authentic Internet houses the best that 8 bit music has to offer with four condensed levels including the delightful Hemingway Text Adventure. Coin Flip is the simplest game on earth featuring a showdown with the most dastardly villain of them all, your mother. I have AI-integrated tools. They focus on network theory, multi-dimensional bias with real-time data filtering and full-stack ML pipelines. I would love to show you a video demo of my AI filtering tools.
         </p>
       </div>
       {/* Subtle background effect */}
