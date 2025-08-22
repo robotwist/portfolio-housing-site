@@ -1,1 +1,1 @@
-self.__REACT_LOADABLE_MANIFEST="{\"components/projects/ProjectsSection.tsx -> ./ProjectCard\":{\"id\":\"components/projects/ProjectsSection.tsx -> ./ProjectCard\",\"files\":[\"static/css/_app-pages-browser_src_components_projects_ProjectCard_tsx.css\",\"static/chunks/_app-pages-browser_src_components_projects_ProjectCard_tsx.js\"]}}"
+self.__REACT_LOADABLE_MANIFEST='{"components/projects/ProjectsSection.tsx -> ./ProjectCard":{"id":4372,"files":["static/css/5c9a78eeb2ee7da8.css","static/chunks/145.0fea88750da0dc36.js","static/chunks/372.fbed71c2a80d7712.js"]}}';

@@ -26,7 +26,7 @@ export default function HeroSection() {
         />
         {/* Headline */}
         <h1 className="gradient-headline text-3xl">
-          Welcome to Rob Wistrand's Portfolio
+          Rob Wistrand — Software Developer Portfolio
         </h1>
         {/* Subheadline */}
         <p className="text-center" style={{
@@ -38,7 +38,7 @@ export default function HeroSection() {
           marginRight: 'auto',
           lineHeight: '2.25'
         }}>
-          I'm Rob. Scroll to my projects. Click them. Download the Chrome extensions. They are useful. My games are fun: 100 Meter Mash, mash buttons to see who is the fastest in the galaxy. Authentic Internet houses the best that 8 bit music has to offer with four condensed levels including the delightful Hemingway Text Adventure. Coin Flip is the simplest game on earth featuring a showdown with the most dastardly villain of them all, your mother. I have AI-integrated tools. They focus on network theory, multi-dimensional bias with real-time data filtering and full-stack ML pipelines. I would love to show you a video demo of my AI filtering tools.
+          I build software products that solve real problems, ship to users, and push creative boundaries. From practical tools to AI experiments and interactive applications, my work demonstrates full-stack development, algorithmic thinking, and product-level design.
         </p>
       </div>
       {/* Subtle background effect */}
