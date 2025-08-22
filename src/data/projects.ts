@@ -5,7 +5,7 @@ export const projects: Project[] = [
   {
     id: "unforgiving-minute",
     title: "Unforgiving Minute",
-    description: "A running training and coaching platform with a dynamic GoldenPace Calculator used by 500+ elite athletes worldwide. Built with responsive design, real-time calculations achieving 200ms response times, and user-focused interfaces that helped athletes improve race times by an average of 3.2%. Features advanced training algorithms and athletic analytics.",
+    description: "A running training and coaching platform with a dynamic GoldenPace Calculator used by athletes worldwide. Built with responsive design, real-time calculations, and user-focused interfaces to help athletes optimize training and track performance. Features advanced training algorithms and athletic analytics with clean, professional design.",
     technologies: ["React", "TypeScript", "Node.js", "Training Algorithms", "Athletic Analytics"],
     imageUrl: "/images/UnforgivingMinute.png",
     githubUrl: "https://github.com/robotwist/unforgiving-minute",
@@ -15,7 +15,7 @@ export const projects: Project[] = [
   {
     id: "authentic-reader",
     title: "Authentic Reader",
-    description: "An AI-powered content analysis tool that processes 10K+ social media posts daily with 95% accuracy in bias detection. Features scalable ML pipelines processing 1M+ data points, real-time network manipulation, and actionable data design that reduced misinformation spread by 40% in test environments.",
+    description: "An AI-powered content analysis tool that processes social media datasets to detect bias and manipulate networks in real-time. Features scalable ML pipelines, real-time network analysis, and actionable data design for misinformation detection and content filtering.",
     technologies: ["Python", "Flask", "TensorFlow", "React", "AWS"],
     imageUrl: "/images/authentic-reader-screenshot.png",
     videoUrl: "/videos/authentic-reader.mp4",
@@ -26,7 +26,7 @@ export const projects: Project[] = [
   {
     id: "authentic-dashboard",
     title: "Authentic Dashboard",
-    description: "Admin dashboard for the Authentic Reader platform handling 50K+ daily data visualizations with 99.9% uptime. Features interactive real-time charts processing 100+ concurrent users, advanced filtering reducing query time by 60%, and responsive design supporting 15+ data visualization types.",
+    description: "Admin dashboard for the Authentic Reader platform with interactive visualizations and real-time data processing. Features responsive design with D3.js charts, advanced filtering capabilities, and clean Material UI interface for comprehensive data analysis and monitoring.",
     technologies: ["React", "TypeScript", "Material UI", "D3.js", "Redux"],
     imageUrl: "/images/authentic-dashboard.png",
     videoUrl: "/videos/authentic-dashboard.mp4",
@@ -37,7 +37,7 @@ export const projects: Project[] = [
   {
     id: "authentic-internet",
     title: "Authentic Internet Game",
-    description: "Full-stack social media data processing platform with 25K+ user interactions and 4.8/5 average rating. Features real-time data visualization processing 5K+ social media posts, interactive network analysis with 100ms response times, and scalable architecture supporting 500+ concurrent users.",
+    description: "Full-stack social media data processing platform with interactive visualizations and real-time network analysis. Features responsive design, scalable architecture, and engaging user interface for exploring social media data patterns and network relationships.",
     technologies: ["Next.js", "React", "CSS"],
     imageUrl: "/images/authentic-internet.png",
     githubUrl: "https://github.com/robotwist/authentic-internet",
@@ -47,7 +47,7 @@ export const projects: Project[] = [
   {
     id: "virgil-ai",
     title: "Virgil AI Assistant",
-    description: "An AI-powered assistant with 1K+ user interactions and 92% task completion rate. Features natural language processing handling 50+ task types, real-time response times under 500ms, and intelligent conversation memory managing 100+ context-aware interactions per session.",
+    description: "An AI-powered assistant that helps users with various tasks through natural language interaction. Features intelligent conversation memory, real-time response processing, and user-friendly interface showcasing AI integration and modern web development skills.",
     technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "AI/ML"],
     imageUrl: "/images/virgil-ai.png",
     videoUrl: "/videos/virgil-ai.mp4",
@@ -104,7 +104,7 @@ export const projects: Project[] = [
   {
     id: "deeply-trivial",
     title: "Deeply Trivial",
-    description: "AI-powered trivia game with 15K+ questions answered and 4.9/5 user rating. Features dynamic difficulty scaling with 85% accuracy improvement, real-time multiplayer support for 50+ concurrent players, and intelligent question generation processing 100+ categories.",
+    description: "AI-powered trivia game with dynamic difficulty scaling and intelligent question generation. Features responsive design, real-time gameplay, and engaging user interface showcasing algorithmic thinking and modern front-end development skills.",
     technologies: ["React", "TypeScript", "AI/ML", "Node.js", "MongoDB"],
     imageUrl: "/images/Deeply Trivial.png",
     githubUrl: "https://github.com/robotwist/deeply-trivial",
@@ -114,7 +114,7 @@ export const projects: Project[] = [
   {
     id: "evolving-machine",
     title: "Evolving the Machine",
-    description: "A game exploring AI evolution with 8K+ game sessions and 4.7/5 rating. Features evolutionary algorithms processing 1000+ generations, real-time AI adaptation with 90% learning accuracy, and interactive storytelling across 15+ classic gaming eras.",
+    description: "A game exploring AI evolution through the history of video games with evolutionary algorithms and real-time AI adaptation. Features interactive storytelling, creative problem-solving, and engaging gameplay demonstrating algorithm design and modern game development skills.",
     technologies: ["React", "TypeScript", "AI/ML", "Game Development", "Evolutionary Algorithms"],
     imageUrl: "/images/EvolveTM.png",
     githubUrl: "https://github.com/robotwist/evolving-machine",
@@ -126,7 +126,7 @@ export const projects: Project[] = [
   {
     id: "100m-dash",
     title: "100 Meter Dash",
-    description: "A fun keyboard mashing game with 5K+ races completed and 4.6/5 rating. Features real-time leaderboards tracking 100+ players, responsive canvas animations at 60fps, and competitive gameplay with 10+ difficulty levels.",
+    description: "A fun keyboard mashing game inspired by old school olympics games. Features responsive canvas animations, real-time leaderboards, and competitive gameplay showcasing front-end development skills and creative game design.",
     technologies: ["JavaScript", "HTML Canvas", "CSS"],
     imageUrl: "/images/100-meter-dash.jpg",
     githubUrl: "https://github.com/robotwist/100-meter-dash",
@@ -136,7 +136,7 @@ export const projects: Project[] = [
   {
     id: "coin-flip",
     title: "Coin Flip Game",
-    description: "A simple yet addictive coin flipping game with 3K+ flips and 4.5/5 rating. Features real-time Firebase leaderboards, 50ms response times, and addictive gameplay mechanics with 80% user return rate.",
+    description: "A simple yet addictive coin flipping game with real-time Firebase leaderboards and responsive design. Features smooth animations, competitive gameplay mechanics, and modern web development practices showcasing JavaScript and Firebase integration skills.",
     technologies: ["JavaScript", "HTML", "CSS", "Firebase"],
     imageUrl: "/images/Coin-Flip.png",
     githubUrl: "https://github.com/robotwist/Coin-Flip-Game-Project-One-GA",
@@ -146,7 +146,7 @@ export const projects: Project[] = [
   {
     id: "ledgerline",
     title: "LedgerLine",
-    description: "A modern accounting platform with 500+ transactions processed and 4.4/5 rating. Features real-time financial tracking, secure data encryption, responsive dashboard with 20+ financial reports, and automated reconciliation reducing manual work by 75%.",
+    description: "A modern accounting platform built with React and Node.js featuring real-time financial tracking, secure data encryption, and responsive dashboard design. Showcases full-stack development skills, database management, and business application design with clean, professional interface.",
     technologies: ["React", "Node.js", "Express", "MongoDB", "Tailwind"],
     imageUrl: "/images/Ledgerline-Opening.png",
     videoUrl: "",
