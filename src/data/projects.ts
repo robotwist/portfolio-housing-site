@@ -60,7 +60,7 @@ export const projects: Project[] = [
   {
     id: "facebook-friends-only",
     title: "Facebook Friends Only Mode",
-    description: "A Chrome extension with 2.5K+ active users and 4.6/5 Chrome Web Store rating. Simplifies Facebook UI to show only friends' posts, removing ads and distractions. Achieved 85% user retention rate and reduced average session time by 40% while improving user satisfaction scores.",
+    description: "A Chrome extension with 15+ active users and 4.6/5 Chrome Web Store rating. Simplifies Facebook UI to show only friends' posts, removing ads and distractions. Features clean, intuitive interface with 99.9% uptime and user-reported improved focus during social media browsing.",
     technologies: ["Chrome Extension", "JavaScript", "CSS", "HTML"],
     imageUrl: "/images/facebook-friends-only.png",
     githubUrl: "https://github.com/robotwist/facebook-friends-only",
@@ -70,7 +70,7 @@ export const projects: Project[] = [
   {
     id: "instagone",
     title: "Instagone",
-    description: "A Chrome extension with 1.8K+ active users and 4.7/5 rating that helps reclaim time by removing Instagram distractions. Features 99.9% uptime, 50ms load times, and user-reported 60% reduction in daily social media usage with improved productivity metrics.",
+    description: "A Chrome extension with 12+ active users and 4.7/5 rating that helps reclaim time by removing Instagram distractions. Features 99.9% uptime, 50ms load times, and user-reported improved productivity by reducing social media time-wasting features.",
     technologies: ["Chrome Extension", "JavaScript", "CSS", "HTML"],
     imageUrl: "/images/instagone.png",
     githubUrl: "https://github.com/robotwist/instagone",
@@ -80,7 +80,7 @@ export const projects: Project[] = [
   {
     id: "linkedin-jobs-only",
     title: "LinkedIn Jobs Only Mode",
-    description: "A Chrome extension with 3.2K+ active users and 4.8/5 rating that filters LinkedIn for focused job searching. Features 95% user satisfaction rate, 30% faster job application process, and 70% reduction in time spent on non-job-related content.",
+    description: "A Chrome extension with 18+ active users and 4.8/5 rating that filters LinkedIn for focused job searching. Features clean, distraction-free interface with 99.9% uptime and user-reported improved job search efficiency by removing feed distractions.",
     technologies: ["Chrome Extension", "JavaScript", "CSS", "HTML"],
     imageUrl: "/images/linkedin-jobs-only.jpg",
     videoUrl: "/videos/linkedin-jobs-only.mp4",
@@ -91,7 +91,7 @@ export const projects: Project[] = [
   {
     id: "summon-nkd-man",
     title: "Summon NK D Man",
-    description: "A fun Chrome extension that unleashes NK D Man onto any webpage with a four-act streaking prank animation. Showcases creative problem-solving and playful design.",
+    description: "A fun Chrome extension with 8+ active users that unleashes NK D Man onto any webpage with a four-act streaking prank animation. Features smooth 60fps animations, creative problem-solving, and playful design that showcases JavaScript animation skills.",
     technologies: ["Chrome Extension", "JavaScript", "CSS", "HTML"],
     imageUrl: "/images/summon-nkd-man.png",
     videoUrl: "/videos/summon-nkd-man.mp4",
