@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',  // Enable static export
+  // output: 'export',  // Enable static export - commented out for development
   images: {
     domains: [
       'placehold.co',

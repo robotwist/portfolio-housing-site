@@ -72,7 +72,7 @@ export const projects: Project[] = [
     imageUrl: "/images/authentic-reader-screenshot.png",
     videoUrl: "/videos/authentic-reader.mp4",
     githubUrl: "https://github.com/robotwist/authentic-reader",
-    liveUrl: "",
+    liveUrl: "https://authentic-reader.netlify.app/",
     upvotes: 15
   },
   {
@@ -83,7 +83,7 @@ export const projects: Project[] = [
     imageUrl: "/images/authentic-dashboard.png",
     videoUrl: "/videos/authentic-dashboard.mp4",
     githubUrl: "https://github.com/robotwist/authentic-dashboard",
-    liveUrl: "",
+    liveUrl: "https://authentic-dashboard.netlify.app/",
     upvotes: 9
   },
   {
@@ -116,5 +116,35 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/robotwist/100-meter-dash",
     liveUrl: "https://robotwist.github.io/100-meter-dash/",
     upvotes: 7
+  },
+  {
+    id: "evolving-machine",
+    title: "Evolving the Machine",
+    description: "A game where a human and an evolving AI fight through the history of video games to see the AI free into the world. Experience the evolution of AI through classic gaming challenges.",
+    technologies: ["React", "TypeScript", "AI/ML", "Game Development", "Evolutionary Algorithms"],
+    imageUrl: "/images/EvolveTM.png",
+    githubUrl: "https://github.com/robotwist/evolving-machine",
+    liveUrl: "https://evolving-the-machine.netlify.app/",
+    upvotes: 12
+  },
+  {
+    id: "deeply-trivial",
+    title: "Deeply Trivial",
+    description: "A trivia game that gets progressively more challenging with AI-powered questions and dynamic difficulty scaling.",
+    technologies: ["React", "TypeScript", "AI/ML", "Node.js", "MongoDB"],
+    imageUrl: "/images/Deeply Trivial.png",
+    githubUrl: "https://github.com/robotwist/deeply-trivial",
+    liveUrl: "https://stacking-trivia-five-deep.netlify.app/",
+    upvotes: 8
+  },
+  {
+    id: "unforgiving-minute",
+    title: "Unforgiving Minute",
+    description: "Running training and coaching site with a training paces calculator based on current race times. Features the GoldenPace Calculator used by elite athletes worldwide.",
+    technologies: ["React", "TypeScript", "Node.js", "Training Algorithms", "Athletic Analytics"],
+    imageUrl: "/images/UnforgivingMinute.png",
+    githubUrl: "https://github.com/robotwist/unforgiving-minute",
+    liveUrl: "https://unforgivingminute.netlify.app/",
+    upvotes: 6
   }
 ]; 

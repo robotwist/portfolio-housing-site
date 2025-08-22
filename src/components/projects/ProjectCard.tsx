@@ -218,12 +218,12 @@ export default function ProjectCard({ project, index, onUpvote }: ProjectCardPro
             <button
               className="card-link"
               style={{ background: "none", border: "none", padding: 0, cursor: "pointer" }}
-              aria-label={`Request demo for ${project.title}`}
+              aria-label={`Open ${project.title} live link`}
               onClick={handleDemoClick}
               type="button"
             >
               <FaExternalLinkAlt />
-              <span>Demo</span>
+              <span>Live Link</span>
             </button>
           </div>
           
@@ -301,6 +301,7 @@ export default function ProjectCard({ project, index, onUpvote }: ProjectCardPro
           </div>
         </div>
       )}
+
     </motion.div>
   );
 } 

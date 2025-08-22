@@ -50,8 +50,13 @@ self.addEventListener('activate', (event) => {
 const networkFirst = async (request) => {
   try {
     const networkResponse = await fetch(request);
-    const cache = await caches.open(DYNAMIC_CACHE);
-    cache.put(request, networkResponse.clone());
+    
+    // Only cache successful responses (not partial responses)
+    if (networkResponse.ok && networkResponse.status !== 206) {
+      const cache = await caches.open(DYNAMIC_CACHE);
+      cache.put(request, networkResponse.clone());
+    }
+    
     return networkResponse;
   } catch (error) {
     const cachedResponse = await caches.match(request);
@@ -67,8 +72,13 @@ const cacheFirst = async (request) => {
   }
   try {
     const networkResponse = await fetch(request);
-    const cache = await caches.open(STATIC_CACHE);
-    cache.put(request, networkResponse.clone());
+    
+    // Only cache successful responses (not partial responses)
+    if (networkResponse.ok && networkResponse.status !== 206) {
+      const cache = await caches.open(STATIC_CACHE);
+      cache.put(request, networkResponse.clone());
+    }
+    
     return networkResponse;
   } catch (error) {
     return new Response('Network error', { status: 408, headers: { 'Content-Type': 'text/plain' } });

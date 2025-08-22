@@ -28,7 +28,7 @@ const AIChat = forwardRef<AIChatHandle, {}>((props, ref) => {
     setMessages([
       { 
         role: 'assistant', 
-        content: "Hi there! I'm Rob's portfolio assistant. What would you like to know about his work or experience?" 
+        content: "Hey there! 👋 I'm Rob.AI, your friendly guide to Rob's awesome portfolio! Want to chat about his projects, his life as a D1 athlete turned developer, or just have a fun conversation? I'm here to help! 🚀" 
       }
     ]);
   }, []);
@@ -163,7 +163,7 @@ const AIChat = forwardRef<AIChatHandle, {}>((props, ref) => {
             }}>
               <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
                 <FaRobot style={{ color: "var(--color-primary)", width: "1.25rem", height: "1.25rem" }} />
-                <h3 className="card-title" style={{ margin: 0 }}>Chat with Me</h3>
+                <h3 className="card-title" style={{ margin: 0 }}>Rob.AI</h3>
               </div>
               <button
                 onClick={() => setIsOpen(false)}

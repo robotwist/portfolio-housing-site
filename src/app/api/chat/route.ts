@@ -1,10 +1,13 @@
 import { NextResponse } from 'next/server';
 
+// Note: Mistral AI integration is available but requires proper setup
+// For now, we'll use the enhanced fallback responses
+
 // Enhanced fallback response patterns with personality and contact redirection
 const FALLBACK_RESPONSES = [
   {
     keywords: ['hello', 'hi', 'hey'],
-    response: "Hey there! 👋 I'm Rob's digital assistant. Want to chat about his projects or connect with him directly?",
+    response: "Hey there! 👋 I'm Rob.AI, your friendly guide to Rob's awesome portfolio! Want to chat about his projects or connect with him directly?",
   },
   {
     keywords: ['project', 'portfolio', 'work'],
@@ -46,16 +49,6 @@ const RANDOM_RESPONSES = [
   "That's beyond my simple script, but I know Rob would love to discuss this with you. He's particularly proud of his work with AI integration and machine learning projects!",
   "I'm just a friendly bot, but Rob's the real expert. He's worked on some fascinating game development projects using DragonRuby - you should check out his portfolio!",
   "While I can't answer that, I know Rob would love to discuss it with you. He's got experience with cloud technologies and DevOps - AWS and Google Cloud are his specialties!",
-  "That's an interesting topic! Rob would be the perfect person to discuss this with. He's built several responsive web applications using Next.js and TypeScript!",
-  "I'm limited in my responses, but Rob would be excited to chat about this. He's worked on some impressive data visualization projects using D3.js!",
-  "That's beyond my capabilities, but Rob would love to talk about it. He's developed several RESTful APIs and worked extensively with GraphQL!",
-  "While I'm just a simple bot, Rob would be happy to discuss this. He's got experience with both SQL and NoSQL databases, including PostgreSQL and MongoDB!",
-  "That's a great question! Rob would be the perfect person to ask. He's worked on several projects involving real-time data processing and WebSocket implementations!",
-  "I'm limited in my knowledge, but Rob would love to chat about this. He's developed several progressive web applications (PWAs) with offline capabilities!",
-  "That's beyond my programming, but Rob would be excited to discuss this. He's worked on projects involving natural language processing and AI chatbots!",
-  "While I'm just a basic bot, Rob would love to discuss this. He's experienced with containerization using Docker and Kubernetes!",
-  "That's an interesting topic! Rob would be happy to chat about it. He's worked with various CI/CD pipelines and automated testing frameworks!",
-  "I'm limited in my responses, but Rob would be excited to discuss this. He's built several microservices architectures using Node.js and Express!",
   "That's beyond my capabilities, but Rob would love to talk about it. He's worked with various cloud storage solutions and CDN implementations!",
   "While I'm just a simple bot, Rob would be happy to discuss this. He's experienced with various authentication methods and security implementations!"
 ];
@@ -71,6 +64,9 @@ export async function POST(request: Request) {
         { status: 400 }
       );
     }
+
+    // TODO: Add Mistral AI integration when properly configured
+    // For now, we'll use the enhanced fallback responses
 
     // Check for keyword matches first
     const messageLower = message.toLowerCase();
