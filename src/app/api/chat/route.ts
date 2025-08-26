@@ -90,7 +90,7 @@ Keep responses conversational, enthusiastic, and helpful. Use emojis occasionall
         options: {
           temperature: 0.7,
           top_p: 0.9,
-          max_tokens: 300
+          num_predict: 300
         }
       });
 
