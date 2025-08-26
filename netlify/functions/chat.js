@@ -1,15 +1,29 @@
-const { Ollama } = require('ollama');
+// Note: Ollama runs locally, not on Netlify servers
+// We'll use enhanced keyword matching for production
+let ollama = null;
 
-// Initialize Ollama client
-const ollama = new Ollama({
-  host: 'http://localhost:11434' // Default Ollama host
-});
+try {
+  const { Ollama } = require('ollama');
+  ollama = new Ollama({
+    host: 'http://localhost:11434' // Default Ollama host
+  });
+} catch (error) {
+  console.log('Ollama not available, using keyword matching only');
+}
 
 // Enhanced fallback response patterns with personality and contact redirection
 const FALLBACK_RESPONSES = [
   {
     keywords: ['hello', 'hi', 'hey'],
     response: "Hey there! 👋 I'm Rob.AI, your friendly guide to Rob's awesome portfolio! Want to chat about his projects or connect with him directly?",
+  },
+  {
+    keywords: ['authentic internet', 'authentic-internet'],
+    response: "Authentic Internet is one of Rob's favorite projects! It's a full-stack social media data processing platform with interactive visualizations and real-time network analysis. He built it with Next.js and React, featuring responsive design and scalable architecture. It showcases his skills in data visualization, real-time processing, and modern web development. Pretty cool stuff! 🚀",
+  },
+  {
+    keywords: ['nkd man', 'nkd', 'summon'],
+    response: "Summon NK D Man is Rob's hilarious Chrome extension! It unleashes NK D Man onto any webpage with a four-act streaking prank animation. Features smooth 60fps animations and creative problem-solving - it's got 8+ active users and showcases his JavaScript animation skills. Definitely one of his more entertaining projects! 😂",
   },
   {
     keywords: ['project', 'portfolio', 'work'],
@@ -85,12 +99,13 @@ exports.handler = async (event, context) => {
       };
     }
 
-    // Try Llama 3.2 first, fall back to keyword matching if it fails
-    try {
-      let systemPrompt = '';
-      
-      if (mode === 'interview') {
-        systemPrompt = `You ARE Rob Wistrand speaking in first person. You're in an interview and should answer as if you're Rob himself. Be authentic, funny, and tell your real stories:
+    // Try Llama 3.2 first if available, fall back to keyword matching if it fails
+    if (ollama) {
+      try {
+        let systemPrompt = '';
+        
+        if (mode === 'interview') {
+          systemPrompt = `You ARE Rob Wistrand speaking in first person. You're in an interview and should answer as if you're Rob himself. Be authentic, funny, and tell your real stories:
 
 - You were a D1 athlete and 9-time state champion - talk about the discipline and work ethic you developed
 - You've climbed 12 different 14,000 ft peaks across multiple states - share some crazy climbing stories
@@ -100,8 +115,8 @@ exports.handler = async (event, context) => {
 - You have a playful personality and love to joke around
 
 Answer as Rob would - with energy, humor, and authenticity. Use "I" statements and share personal anecdotes. Keep it conversational and under 200 words.`;
-      } else {
-        systemPrompt = `You are Rob.AI, a playful and friendly AI assistant for Rob Wistrand's portfolio website. You have a fun, energetic personality and love to talk about:
+        } else {
+          systemPrompt = `You are Rob.AI, a playful and friendly AI assistant for Rob Wistrand's portfolio website. You have a fun, energetic personality and love to talk about:
 
 - Rob's background as a D1 athlete and 9-time state champion
 - His transition into software development and passion for coding
@@ -111,32 +126,34 @@ Answer as Rob would - with energy, humor, and authenticity. Use "I" statements a
 - His work ethic and determination from his athletic background
 
 Keep responses conversational, enthusiastic, and helpful. Use emojis occasionally to keep things fun! If someone asks about contacting Rob, direct them to the contact form below or his LinkedIn. Keep responses under 200 words.`;
-      }
-
-      const response = await ollama.chat({
-        model: 'llama3:8b',
-        messages: [
-          { role: 'system', content: systemPrompt },
-          { role: 'user', content: message }
-        ],
-        options: {
-          temperature: 0.7,
-          top_p: 0.9,
-          num_predict: 300
         }
-      });
 
-      return {
-        statusCode: 200,
-        headers,
-        body: JSON.stringify({
-          message: response.message.content,
-          timestamp: new Date().toISOString()
-        }),
-      };
+        const response = await ollama.chat({
+          model: 'llama3:8b',
+          messages: [
+            { role: 'system', content: systemPrompt },
+            { role: 'user', content: message }
+          ],
+          options: {
+            temperature: 0.7,
+            top_p: 0.9,
+            num_predict: 300
+          }
+        });
 
-    } catch (llamaError) {
-      console.log('Llama 3.2 failed, falling back to keyword matching:', llamaError);
+        return {
+          statusCode: 200,
+          headers,
+          body: JSON.stringify({
+            message: response.message.content,
+            timestamp: new Date().toISOString()
+          }),
+        };
+
+      } catch (llamaError) {
+        console.log('Llama 3.2 failed, falling back to keyword matching:', llamaError);
+      }
+    }
       
       // Fall back to keyword matching
       const messageLower = message.toLowerCase();
