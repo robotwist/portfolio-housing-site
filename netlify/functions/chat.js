@@ -1,11 +1,12 @@
-// Note: Ollama runs locally, not on Netlify servers
-// We'll use enhanced keyword matching for production
+// Ollama will be deployed to Railway
 let ollama = null;
 
 try {
   const { Ollama } = require('ollama');
+  // Use Railway Ollama URL (we'll set this as environment variable)
+  const OLLAMA_URL = process.env.OLLAMA_URL || 'http://localhost:11434';
   ollama = new Ollama({
-    host: 'http://localhost:11434' // Default Ollama host
+    host: OLLAMA_URL
   });
 } catch (error) {
   console.log('Ollama not available, using keyword matching only');
