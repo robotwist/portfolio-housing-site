@@ -12128,3 +12128,95 @@ The chatbot can now switch between "Rob.AI assistant" mode and "Rob interview" m
 
 ---
 
+_**User**_
+
+sw.js:52 Refused to connect to 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap' because it violates the following Content Security Policy directive: "default-src 'self'". Note that 'connect-src' was not explicitly set, so 'default-src' is used as a fallback.
+
+sw.js:52 Fetch API cannot load https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap. Refused to connect because it violates the document's Content Security Policy.
+2
+sw.js:1 Uncaught (in promise) TypeError: Failed to convert value to 'Response'.
+4ef94700b25f16e0.css:1 
+ GET https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap net::ERR_FAILED
+page-6816cba11f478769.js:1 
+ POST https://portfolio-housing-site.netlify.app/api/chat 404 (Not Found)
+﻿
+
+
+---
+
+_**Assistant**_
+
+I see there are still CSP issues and the chat API is returning 404. Let me fix both issues:
+
+
+---
+
+Read file: netlify.toml
+
+---
+
+The CSP looks correct. The issue might be that the service worker is caching the old CSP. Let me check if there's a service worker issue and also fix the API routing. First, let me check the Next.js configuration:
+
+
+---
+
+Read file: next.config.js
+
+---
+
+I see the issue! The `output: 'export'` setting is causing static export, which doesn't support API routes. That's why the `/api/chat` endpoint is returning 404. Let me fix this by commenting out the static export for development and also update the CSP:
+
+
+---
+
+<details><summary>Edit file: next.config.js</summary>
+
+undefined
+
+**Chunk 1**
+Lines added: 1, lines removed: 1
+
+```diff
+@@ -1,5 +1,5 @@
+  /** @type {import('next').NextConfig} */
+  const nextConfig = {
+-   output: 'export',  // Enable static export for production
++   // output: 'export',  // Commented out for API routes support
+    images: {
+      domains: [
+```
+
+</details>
+
+---
+
+Now let me also update the CSP to be more permissive for development:
+
+
+---
+
+<details><summary>Edit file: netlify.toml</summary>
+
+undefined
+
+**Chunk 1**
+Lines added: 1, lines removed: 1
+
+```diff
+@@ -15,5 +15,5 @@
+      Referrer-Policy = "strict-origin-when-cross-origin"
+      Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+-     Content-Security-Policy = "default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; script-src 'self' 'unsafe-inline' 'unsafe-eval'; frame-src 'self' https://portfolio-housing-site.netlify.app; connect-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com;"
++     Content-Security-Policy = "default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; script-src 'self' 'unsafe-inline' 'unsafe-eval'; frame-src 'self' https://portfolio-housing-site.netlify.app; connect-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://portfolio-housing-site.netlify.app;"
+  
+  # Cache static assets
+```
+
+</details>
+
+---
+
+
+
+---
+
