@@ -19,6 +19,7 @@ const AIChat = forwardRef<AIChatHandle, {}>((props, ref) => {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
+  const [isInterviewMode, setIsInterviewMode] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
@@ -32,6 +33,20 @@ const AIChat = forwardRef<AIChatHandle, {}>((props, ref) => {
       }
     ]);
   }, []);
+
+  // Reset messages when interview mode changes
+  useEffect(() => {
+    if (isOpen) {
+      setMessages([
+        { 
+          role: 'assistant', 
+          content: isInterviewMode 
+            ? "Hey! 👋 I'm Rob - ready for an interview? Ask me anything about my background, projects, or crazy climbing stories! 🏔️" 
+            : "Hey there! 👋 I'm Rob.AI, your friendly guide to Rob's awesome portfolio! Want to chat about his projects, his life as a D1 athlete turned developer, or just have a fun conversation? I'm here to help! 🚀" 
+        }
+      ]);
+    }
+  }, [isInterviewMode, isOpen]);
 
   // Expose the toggleChat method to the parent component
   useImperativeHandle(ref, () => ({
@@ -67,7 +82,10 @@ const AIChat = forwardRef<AIChatHandle, {}>((props, ref) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ message: userMessage }),
+        body: JSON.stringify({ 
+          message: userMessage,
+          mode: isInterviewMode ? 'interview' : 'normal'
+        }),
       });
 
       if (!response.ok) {
@@ -163,31 +181,64 @@ const AIChat = forwardRef<AIChatHandle, {}>((props, ref) => {
             }}>
               <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
                 <FaRobot style={{ color: "var(--color-primary)", width: "1.25rem", height: "1.25rem" }} />
-                <h3 className="card-title" style={{ margin: 0 }}>Rob.AI</h3>
+                <h3 className="card-title" style={{ margin: 0 }}>
+                  {isInterviewMode ? "Rob (Interview Mode)" : "Rob.AI"}
+                </h3>
               </div>
-              <button
-                onClick={() => setIsOpen(false)}
-                style={{
-                  background: "none",
-                  border: "none",
-                  color: "var(--color-muted-foreground)",
-                  cursor: "pointer",
-                  padding: "0.5rem",
-                  borderRadius: "0.25rem",
-                  transition: "color 0.2s ease, background-color 0.2s ease",
-                }}
-                onMouseOver={(e) => {
-                  e.currentTarget.style.backgroundColor = "var(--color-card-hover)";
-                  e.currentTarget.style.color = "var(--color-foreground)";
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.style.backgroundColor = "transparent";
-                  e.currentTarget.style.color = "var(--color-muted-foreground)";
-                }}
-                aria-label="Close chat"
-              >
-                <FaTimes style={{ width: "1.25rem", height: "1.25rem" }} />
-              </button>
+              <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                <button
+                  onClick={() => setIsInterviewMode(!isInterviewMode)}
+                  style={{
+                    background: isInterviewMode ? "var(--color-primary)" : "var(--color-card-hover)",
+                    border: "1px solid var(--color-border)",
+                    color: isInterviewMode ? "white" : "var(--color-foreground)",
+                    cursor: "pointer",
+                    padding: "0.5rem 0.75rem",
+                    borderRadius: "0.25rem",
+                    fontSize: "0.75rem",
+                    fontWeight: "500",
+                    transition: "all 0.2s ease",
+                  }}
+                  onMouseOver={(e) => {
+                    if (!isInterviewMode) {
+                      e.currentTarget.style.backgroundColor = "var(--color-primary)";
+                      e.currentTarget.style.color = "white";
+                    }
+                  }}
+                  onMouseOut={(e) => {
+                    if (!isInterviewMode) {
+                      e.currentTarget.style.backgroundColor = "var(--color-card-hover)";
+                      e.currentTarget.style.color = "var(--color-foreground)";
+                    }
+                  }}
+                  aria-label="Toggle interview mode"
+                >
+                  {isInterviewMode ? "Normal" : "Interview"}
+                </button>
+                <button
+                  onClick={() => setIsOpen(false)}
+                  style={{
+                    background: "none",
+                    border: "none",
+                    color: "var(--color-muted-foreground)",
+                    cursor: "pointer",
+                    padding: "0.5rem",
+                    borderRadius: "0.25rem",
+                    transition: "color 0.2s ease, background-color 0.2s ease",
+                  }}
+                  onMouseOver={(e) => {
+                    e.currentTarget.style.backgroundColor = "var(--color-card-hover)";
+                    e.currentTarget.style.color = "var(--color-foreground)";
+                  }}
+                  onMouseOut={(e) => {
+                    e.currentTarget.style.backgroundColor = "transparent";
+                    e.currentTarget.style.color = "var(--color-muted-foreground)";
+                  }}
+                  aria-label="Close chat"
+                >
+                  <FaTimes style={{ width: "1.25rem", height: "1.25rem" }} />
+                </button>
+              </div>
             </div>
 
             {/* Chat messages */}
