@@ -1,0 +1,33 @@
+{
+  "name": "ollama-chatbot",
+  "description": "Ollama server with Llama 3.2 for portfolio chatbot",
+  "repository": "https://github.com/robotwist/portfolio-housing-site",
+  "logo": "https://ollama.ai/ollama.png",
+  "keywords": ["ollama", "llama", "ai", "chatbot"],
+  "env": {
+    "OLLAMA_HOST": {
+      "description": "Ollama host configuration",
+      "value": "0.0.0.0"
+    },
+    "OLLAMA_ORIGINS": {
+      "description": "Allowed origins for Ollama",
+      "value": "*"
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/docker"
+    }
+  ],
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "basic"
+    }
+  },
+  "addons": [
+    {
+      "plan": "heroku-postgresql:mini"
+    }
+  ]
+}
