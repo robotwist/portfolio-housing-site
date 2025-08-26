@@ -24,17 +24,6 @@ export const projects: Project[] = [
     upvotes: 15
   },
   {
-    id: "authentic-dashboard",
-    title: "Authentic Dashboard",
-    description: "Admin dashboard for the Authentic Reader platform with interactive visualizations and real-time data processing. Features responsive design with D3.js charts, advanced filtering capabilities, and clean Material UI interface for comprehensive data analysis and monitoring.",
-    technologies: ["React", "TypeScript", "Material UI", "D3.js", "Redux"],
-    imageUrl: "/images/authentic-dashboard.png",
-    videoUrl: "/videos/authentic-dashboard.mp4",
-    githubUrl: "https://github.com/robotwist/authentic-dashboard",
-    liveUrl: "https://authentic-dashboard.netlify.app/",
-    upvotes: 9
-  },
-  {
     id: "authentic-internet",
     title: "Authentic Internet Game",
     description: "Full-stack social media data processing platform with interactive visualizations and real-time network analysis. Features responsive design, scalable architecture, and engaging user interface for exploring social media data patterns and network relationships.",
@@ -153,5 +142,15 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/robotwist/Ledgerline",
     liveUrl: "https://ledgerline-a661b98ef7f7.herokuapp.com/",
     upvotes: 8
+  },
+  {
+    id: "authentic-dashboard",
+    title: "Authentic Dashboard",
+    description: "Admin dashboard for the Authentic Reader platform with interactive visualizations and real-time data processing. Features responsive design with D3.js charts, advanced filtering capabilities, and clean Material UI interface for comprehensive data analysis and monitoring.",
+    technologies: ["React", "TypeScript", "Material UI", "D3.js", "Redux"],
+    imageUrl: "/images/authentic-dashboard.png",
+    videoUrl: "/videos/authentic-dashboard.mp4",
+    githubUrl: "https://github.com/robotwist/authentic-dashboard",
+    upvotes: 9
   }
 ]; 
