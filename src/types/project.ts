@@ -6,6 +6,6 @@ export interface Project {
   imageUrl: string;
   videoUrl?: string;
   githubUrl: string;
-  liveUrl: string;
+  liveUrl?: string;
   upvotes: number;
 } 
