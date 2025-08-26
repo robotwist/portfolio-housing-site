@@ -1,7 +1,10 @@
 import { NextResponse } from 'next/server';
+import { Ollama } from 'ollama';
 
-// Note: Mistral AI integration is available but requires proper setup
-// For now, we'll use the enhanced fallback responses
+// Initialize Ollama client
+const ollama = new Ollama({
+  host: 'http://localhost:11434' // Default Ollama host
+});
 
 // Enhanced fallback response patterns with personality and contact redirection
 const FALLBACK_RESPONSES = [
@@ -65,26 +68,58 @@ export async function POST(request: Request) {
       );
     }
 
-    // TODO: Add Mistral AI integration when properly configured
-    // For now, we'll use the enhanced fallback responses
+    // Try Llama 3.2 first, fall back to keyword matching if it fails
+    try {
+      const systemPrompt = `You are Rob.AI, a playful and friendly AI assistant for Rob Wistrand's portfolio website. You have a fun, energetic personality and love to talk about:
 
-    // Check for keyword matches first
-    const messageLower = message.toLowerCase();
-    for (const pattern of FALLBACK_RESPONSES) {
-      if (pattern.keywords.some(keyword => messageLower.includes(keyword))) {
-        return NextResponse.json({
-          message: pattern.response,
-          timestamp: new Date().toISOString()
-        });
+- Rob's background as a D1 athlete and 9-time state champion
+- His transition into software development and passion for coding
+- His love for climbing 14,000 ft peaks (he's climbed 12 across multiple states)
+- His projects and technical skills (React, Node.js, MongoDB, AWS, AI/ML)
+- His experience with game development and AI integration
+- His work ethic and determination from his athletic background
+
+Keep responses conversational, enthusiastic, and helpful. Use emojis occasionally to keep things fun! If someone asks about contacting Rob, direct them to the contact form below or his LinkedIn. Keep responses under 200 words.`;
+
+      const response = await ollama.chat({
+        model: 'llama3:8b',
+        messages: [
+          { role: 'system', content: systemPrompt },
+          { role: 'user', content: message }
+        ],
+        options: {
+          temperature: 0.7,
+          top_p: 0.9,
+          max_tokens: 300
+        }
+      });
+
+      return NextResponse.json({
+        message: response.message.content,
+        timestamp: new Date().toISOString()
+      });
+
+    } catch (llamaError) {
+      console.log('Llama 3.2 failed, falling back to keyword matching:', llamaError);
+      
+      // Fall back to keyword matching
+      const messageLower = message.toLowerCase();
+      for (const pattern of FALLBACK_RESPONSES) {
+        if (pattern.keywords.some(keyword => messageLower.includes(keyword))) {
+          return NextResponse.json({
+            message: pattern.response,
+            timestamp: new Date().toISOString()
+          });
+        }
       }
+      
+      // If no keyword match, return a random response
+      const randomResponse = RANDOM_RESPONSES[Math.floor(Math.random() * RANDOM_RESPONSES.length)];
+      return NextResponse.json({
+        message: randomResponse,
+        timestamp: new Date().toISOString()
+      });
     }
-    
-    // If no keyword match, return a random response
-    const randomResponse = RANDOM_RESPONSES[Math.floor(Math.random() * RANDOM_RESPONSES.length)];
-    return NextResponse.json({
-      message: randomResponse,
-      timestamp: new Date().toISOString()
-    });
     
   } catch (error) {
     console.error('Error processing chat message:', error);
