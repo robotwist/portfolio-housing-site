@@ -45,6 +45,28 @@ export const projects: Project[] = [
     upvotes: 0
   },
   
+  // ADDITIONAL INTERACTIVE PROJECTS
+  {
+    id: "deeply-trivial",
+    title: "Deeply Trivial",
+    description: "AI-powered trivia game with dynamic difficulty scaling and intelligent question generation. Features responsive design, real-time gameplay, and engaging user interface showcasing algorithmic thinking and modern front-end development skills.",
+    technologies: ["React", "TypeScript", "AI/ML", "Node.js", "MongoDB"],
+    imageUrl: "/images/Deeply Trivial.png",
+    githubUrl: "https://github.com/robotwist/deeply-trivial",
+    liveUrl: "https://stacking-trivia-five-deep.netlify.app/",
+    upvotes: 8
+  },
+  {
+    id: "evolving-machine",
+    title: "Evolving the Machine",
+    description: "A game exploring AI evolution through the history of video games with evolutionary algorithms and real-time AI adaptation. Features interactive storytelling, creative problem-solving, and engaging gameplay demonstrating algorithm design and modern game development skills.",
+    technologies: ["React", "TypeScript", "AI/ML", "Game Development", "Evolutionary Algorithms"],
+    imageUrl: "/images/EvolveTM.png",
+    githubUrl: "https://github.com/robotwist/evolving-machine",
+    liveUrl: "https://evolving-the-machine.netlify.app/",
+    upvotes: 12
+  },
+  
   // CHROME EXTENSIONS - Practical tools shipped to real users
   {
     id: "facebook-friends-only",
@@ -87,28 +109,6 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/robotwist/summon-nkd-man",
     liveUrl: "https://chromewebstore.google.com/detail/penadbpfpdlcikkahaniobpnoikgjfoh",
     upvotes: 0
-  },
-  
-  // ADDITIONAL INTERACTIVE PROJECTS
-  {
-    id: "deeply-trivial",
-    title: "Deeply Trivial",
-    description: "AI-powered trivia game with dynamic difficulty scaling and intelligent question generation. Features responsive design, real-time gameplay, and engaging user interface showcasing algorithmic thinking and modern front-end development skills.",
-    technologies: ["React", "TypeScript", "AI/ML", "Node.js", "MongoDB"],
-    imageUrl: "/images/Deeply Trivial.png",
-    githubUrl: "https://github.com/robotwist/deeply-trivial",
-    liveUrl: "https://stacking-trivia-five-deep.netlify.app/",
-    upvotes: 8
-  },
-  {
-    id: "evolving-machine",
-    title: "Evolving the Machine",
-    description: "A game exploring AI evolution through the history of video games with evolutionary algorithms and real-time AI adaptation. Features interactive storytelling, creative problem-solving, and engaging gameplay demonstrating algorithm design and modern game development skills.",
-    technologies: ["React", "TypeScript", "AI/ML", "Game Development", "Evolutionary Algorithms"],
-    imageUrl: "/images/EvolveTM.png",
-    githubUrl: "https://github.com/robotwist/evolving-machine",
-    liveUrl: "https://evolving-the-machine.netlify.app/",
-    upvotes: 12
   },
   
   // OTHER FUN EXPERIMENTS
