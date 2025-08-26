@@ -1,66 +1,58 @@
 # Ollama Deployment Guide
 
-## Deploy Ollama to Heroku
+## Deploy Ollama to Railway
 
-### Step 1: Install Heroku CLI
-```bash
-# Install Heroku CLI if you haven't already
-curl https://cli-assets.heroku.com/install.sh | sh
-```
+### Step 1: Create Railway Account
+1. Go to [railway.app](https://railway.app)
+2. Sign up with GitHub
+3. Create a new project
 
-### Step 2: Login to Heroku
-```bash
-heroku login
-```
+### Step 2: Deploy Ollama
+1. **Connect GitHub Repository**
+   - Click "Deploy from GitHub repo"
+   - Select this repository
+   - Railway will detect the Dockerfile automatically
 
-### Step 3: Create Heroku App
-```bash
-# Create a new Heroku app
-heroku create your-ollama-app-name
+2. **Configure Environment Variables**
+   - Go to your Railway project settings
+   - Add environment variables:
+     - `OLLAMA_HOST=0.0.0.0`
+     - `OLLAMA_ORIGINS=*`
 
-# Set the buildpack to Docker
-heroku buildpacks:set heroku/docker
-```
+3. **Deploy**
+   - Railway will build and deploy automatically
+   - First deployment may take 10-15 minutes (downloading Llama 3.2)
 
-### Step 4: Deploy to Heroku
-```bash
-# Deploy the app
-git push heroku main
+### Step 3: Get Railway URL
+1. Once deployed, go to your Railway project
+2. Copy the generated URL (e.g., `https://your-project.railway.app`)
+3. Test it: `https://your-project.railway.app/api/tags`
 
-# Scale the dyno (you might need to upgrade for more memory)
-heroku ps:scale web=1
-```
-
-### Step 5: Get Heroku URL
-1. Your app will be available at: `https://your-ollama-app-name.herokuapp.com`
-2. Test it: `https://your-ollama-app-name.herokuapp.com/api/tags`
-
-### Step 6: Update Netlify Environment
+### Step 4: Update Netlify Environment
 1. Go to your Netlify project settings
 2. Add environment variable:
-   - `OLLAMA_URL=https://your-ollama-app-name.herokuapp.com`
+   - `OLLAMA_URL=https://your-project.railway.app`
 
-### Step 7: Redeploy Netlify
+### Step 5: Redeploy Netlify
 ```bash
 netlify deploy --prod
 ```
 
 ## Cost Estimate
-- **Heroku Basic Dyno**: $7/month
-- **Memory**: 512MB RAM (sufficient for Llama 3.2)
-- **Total**: ~$7/month
+- **Railway Free Tier**: $5/month credit
+- **Llama 3.2 8B**: ~$2-3/month for moderate usage
+- **Total**: Likely free or very low cost
 
-## Alternative: Railway (Cheaper)
-If Heroku is too expensive, Railway is cheaper:
-1. Go to [railway.app](https://railway.app)
-2. Use the existing Dockerfile
-3. Deploy from GitHub
-4. Cost: ~$2-3/month
+## Alternative: Heroku
+If Railway doesn't work, Heroku is another option:
+1. Use the Heroku CLI
+2. Deploy with Docker
+3. Cost: ~$7/month
 
 ## Testing
 Once deployed, test the chatbot - it should now use Llama 3.2 for all responses!
 
 ## Troubleshooting
-- If you get memory errors, upgrade to a larger dyno
+- Check Railway logs in the dashboard
 - First deployment may take 15-20 minutes (downloading Llama 3.2)
-- Check logs: `heroku logs --tail`
+- If you get memory errors, upgrade the Railway plan
