@@ -40,9 +40,9 @@ export default function HeroSection() {
         }}>
           I build software products that solve real problems, ship to users, and push creative boundaries.
       
-          From practical tools to AI experiments and interactive applications, my work demonstrates full-stack development, algorithmic thinking, and product-level design.
+          From practical tools that utilize machine learning and agentic use of advanced tools and interactive applications, my work demonstrates full-stack development, algorithmic thinking, and product-level design.
         
-          Featured projects include running training platforms, AI-integrated social media tools, Chrome extensions, and interactive games—all built with modern technologies and deployed to real users.
+          Featured projects include running training platforms, agentic purified social media tools, Chrome extensions, and interactive games—all built with modern technologies and deployed to real users.
         </p>
       </div>
       {/* Subtle background effect */}
