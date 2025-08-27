@@ -38,7 +38,11 @@ export default function HeroSection() {
           marginRight: 'auto',
           lineHeight: '2.25'
         }}>
-          I build software products that solve real problems, ship to users, and push creative boundaries. From practical tools to AI experiments and interactive applications, my work demonstrates full-stack development, algorithmic thinking, and product-level design.
+          I build software products that solve real problems, ship to users, and push creative boundaries.
+          <br />
+          From practical tools to AI experiments and interactive applications, my work demonstrates full-stack development, algorithmic thinking, and product-level design.
+          <br />
+          Featured projects include running training platforms, AI-integrated social media tools, Chrome extensions, and interactive games—all built with modern technologies and deployed to real users.
         </p>
       </div>
       {/* Subtle background effect */}
