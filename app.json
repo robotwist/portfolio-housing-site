@@ -1,0 +1,26 @@
+{
+  "name": "ollama-service",
+  "description": "Ollama service for Rob.AI chatbot",
+  "repository": "https://github.com/robotwist/portfolio-housing-site",
+  "keywords": ["ollama", "ai", "llama", "chatbot"],
+  "buildpacks": [
+    {
+      "url": "heroku/docker"
+    }
+  ],
+  "env": {
+    "OLLAMA_HOST": {
+      "value": "0.0.0.0"
+    },
+    "OLLAMA_ORIGINS": {
+      "value": "*"
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "basic"
+    }
+  },
+  "stack": "container"
+}
