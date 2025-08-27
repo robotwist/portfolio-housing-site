@@ -7,5 +7,8 @@ ENV OLLAMA_ORIGINS=*
 # Expose the Ollama port
 EXPOSE 11434
 
-# Start Ollama and pull the model
-CMD ["sh", "-c", "ollama serve & sleep 10 && ollama pull llama3:8b && wait"]
+# Create startup script
+RUN echo '#!/bin/bash\nollama serve &\nsleep 30\nollama pull llama3:8b\nwait' > /start.sh && chmod +x /start.sh
+
+# Start with the script
+CMD ["/start.sh"]
