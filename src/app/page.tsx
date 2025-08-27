@@ -6,15 +6,13 @@ import Footer from '@/components/layout/Footer';
 import HeroSection from '@/components/layout/HeroSection';
 import ProjectsSection from '@/components/projects/ProjectsSection';
 import ContactSection from '@/components/layout/ContactSection';
-import AIChat, { AIChatHandle } from '@/components/ui/AIChat';
+import AIChat from '@/components/ui/AIChat';
 import TechScroll from '@/components/ui/TechScroll';
 import PongGameCard from '@/components/games/PongGameCard';
 import ResumeSection from '@/components/layout/ResumeSection';
 
 export default function Home() {
-  const [isChatOpen, setIsChatOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const chatRef = useRef<AIChatHandle>(null);
 
   useEffect(() => {
     // Check if device is mobile
@@ -32,15 +30,11 @@ export default function Home() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  const handleToggleChat = () => {
-    if (chatRef.current) {
-      chatRef.current.toggleChat();
-    }
-  };
+
 
   return (
     <main style={{ minHeight: '100vh' }}>
-      <Header toggleChat={handleToggleChat} />
+      <Header />
       <HeroSection />
       
       {/* Resume Section */}
@@ -113,7 +107,7 @@ export default function Home() {
       </section>
       
       <Footer />
-      <AIChat ref={chatRef} />
+      <AIChat />
     </main>
   );
 }
