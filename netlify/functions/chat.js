@@ -155,8 +155,8 @@ Keep responses conversational, enthusiastic, and helpful. Use emojis occasionall
         console.log('Llama 3.2 failed, falling back to keyword matching:', llamaError);
       }
     }
-      
-      // Fall back to keyword matching
+    
+    // Fall back to keyword matching
       const messageLower = message.toLowerCase();
       for (const pattern of FALLBACK_RESPONSES) {
         if (pattern.keywords.some(keyword => messageLower.includes(keyword))) {
