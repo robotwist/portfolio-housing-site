@@ -181,7 +181,6 @@ Keep responses conversational, enthusiastic, and helpful. Use emojis occasionall
           timestamp: new Date().toISOString()
         }),
       };
-    }
     
   } catch (error) {
     console.error('Error processing chat message:', error);
