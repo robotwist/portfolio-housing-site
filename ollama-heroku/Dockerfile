@@ -8,4 +8,4 @@ ENV OLLAMA_ORIGINS=*
 EXPOSE 11434
 
 # Start Ollama
-CMD ["ollama", "serve"]
+CMD ["/bin/ollama", "serve"]

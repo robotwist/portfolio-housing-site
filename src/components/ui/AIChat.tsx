@@ -1,57 +1,35 @@
 "use client";
 
-import { useState, useRef, useEffect, forwardRef, useImperativeHandle } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { FaTimes, FaPaperPlane, FaRobot } from 'react-icons/fa';
+import React, { useState, useRef, useEffect } from 'react';
 
 interface Message {
   role: 'user' | 'assistant';
   content: string;
+  timestamp: string;
 }
 
-export interface AIChatHandle {
-  toggleChat: () => void;
+interface ChatStats {
+  totalRequests: number;
+  keywordMatches: number;
+  defaultResponses: number;
+  successRate: string;
+  unmatchedQueries: Array<{query: string, timestamp: string}>;
 }
 
-const AIChat = forwardRef<AIChatHandle, {}>((props, ref) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([]);
+const AIChat: React.FC = () => {
+  const [messages, setMessages] = useState<Message[]>([
+    {
+      role: 'assistant',
+      content: "Hey there! 👋 I'm Rob.AI, your friendly guide to Rob's awesome portfolio! Want to chat about his projects or connect with him directly?",
+      timestamp: new Date().toISOString()
+    }
+  ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
   const [isInterviewMode, setIsInterviewMode] = useState(false);
+  const [showStats, setShowStats] = useState(false);
+  const [stats, setStats] = useState<ChatStats | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLTextAreaElement>(null);
-
-  // Handle initial mount
-  useEffect(() => {
-    setIsMounted(true);
-    setMessages([
-      { 
-        role: 'assistant', 
-        content: "Hey there! 👋 I'm Rob.AI, your friendly guide to Rob's awesome portfolio! Want to chat about his projects, his life as a D1 athlete turned developer, or just have a fun conversation? I'm here to help! 🚀" 
-      }
-    ]);
-  }, []);
-
-  // Reset messages when interview mode changes
-  useEffect(() => {
-    if (isOpen) {
-      setMessages([
-        { 
-          role: 'assistant', 
-          content: isInterviewMode 
-            ? "Hey! 👋 I'm Rob - ready for an interview? Ask me anything about my background, projects, or crazy climbing stories! 🏔️" 
-            : "Hey there! 👋 I'm Rob.AI, your friendly guide to Rob's awesome portfolio! Want to chat about his projects, his life as a D1 athlete turned developer, or just have a fun conversation? I'm here to help! 🚀" 
-        }
-      ]);
-    }
-  }, [isInterviewMode, isOpen]);
-
-  // Expose the toggleChat method to the parent component
-  useImperativeHandle(ref, () => ({
-    toggleChat: () => setIsOpen(prev => !prev)
-  }));
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -61,19 +39,18 @@ const AIChat = forwardRef<AIChatHandle, {}>((props, ref) => {
     scrollToBottom();
   }, [messages]);
 
-  useEffect(() => {
-    if (isOpen && inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, [isOpen]);
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
 
-    const userMessage = input.trim();
+    const userMessage: Message = {
+      role: 'user',
+      content: input,
+      timestamp: new Date().toISOString()
+    };
+
+    setMessages(prev => [...prev, userMessage]);
     setInput('');
-    setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
     setIsLoading(true);
 
     try {
@@ -82,336 +59,162 @@ const AIChat = forwardRef<AIChatHandle, {}>((props, ref) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ 
-          message: userMessage,
+        body: JSON.stringify({
+          message: input,
           mode: isInterviewMode ? 'interview' : 'normal'
         }),
       });
 
-      if (!response.ok) {
-        throw new Error('Failed to get response');
-      }
-
       const data = await response.json();
-      setMessages(prev => [...prev, { role: 'assistant', content: data.message }]);
+      
+      const assistantMessage: Message = {
+        role: 'assistant',
+        content: data.message,
+        timestamp: data.timestamp
+      };
+
+      setMessages(prev => [...prev, assistantMessage]);
     } catch (error) {
-      setMessages(prev => [
-        ...prev,
-        {
-          role: 'assistant',
-          content: 'Sorry, I encountered an error. Please try again later.',
-        },
-      ]);
+      console.error('Error sending message:', error);
+      const errorMessage: Message = {
+        role: 'assistant',
+        content: "Sorry, I'm having trouble connecting right now. Please try again!",
+        timestamp: new Date().toISOString()
+      };
+      setMessages(prev => [...prev, errorMessage]);
     } finally {
       setIsLoading(false);
     }
   };
 
-  // Don't render anything until after mount
-  if (!isMounted) {
-    return null;
-  }
+  const fetchStats = async () => {
+    try {
+      const response = await fetch('/.netlify/functions/chat/stats');
+      const data = await response.json();
+      setStats(data);
+    } catch (error) {
+      console.error('Error fetching stats:', error);
+    }
+  };
+
+  useEffect(() => {
+    if (showStats) {
+      fetchStats();
+      const interval = setInterval(fetchStats, 30000); // Refresh every 30 seconds
+      return () => clearInterval(interval);
+    }
+  }, [showStats]);
 
   return (
-    <>
-      {/* Chat button */}
-      <motion.button
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-        onClick={() => setIsOpen(true)}
-        style={{
-          position: "fixed",
-          bottom: "1.5rem",
-          right: "1.5rem",
-          backgroundColor: "var(--color-primary)",
-          color: "white",
-          padding: "1rem",
-          borderRadius: "50%",
-          boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
-          border: "none",
-          cursor: "pointer",
-          zIndex: 50,
-          transition: "background-color 0.2s ease, transform 0.2s ease",
-        }}
-        onMouseOver={(e) => {
-          e.currentTarget.style.backgroundColor = "var(--color-primary-hover)";
-        }}
-        onMouseOut={(e) => {
-          e.currentTarget.style.backgroundColor = "var(--color-primary)";
-        }}
-        aria-label="Open chat"
-      >
-        <FaRobot style={{ width: "1.5rem", height: "1.5rem" }} />
-      </motion.button>
-
-      {/* Chat window */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            transition={{ duration: 0.3 }}
-            className="project-card"
-            style={{
-              position: "fixed",
-              bottom: "2rem",
-              right: "2rem",
-              width: "380px",
-              maxWidth: "calc(100vw - 40px)",
-              height: "500px",
-              maxHeight: "calc(100vh - 100px)",
-              zIndex: 100,
-              display: "flex",
-              flexDirection: "column",
-              overflow: "hidden",
-              boxShadow: "0 10px 25px rgba(0, 0, 0, 0.2)",
-            }}
+    <div className="fixed bottom-4 right-4 w-96 bg-white rounded-lg shadow-xl border border-gray-200 z-50">
+      {/* Chat Header */}
+      <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4 rounded-t-lg flex justify-between items-center">
+        <div className="flex items-center space-x-2">
+          <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+          <h3 className="font-semibold">Rob.AI</h3>
+        </div>
+        <div className="flex items-center space-x-2">
+          <button
+            onClick={() => setShowStats(!showStats)}
+            className="text-xs bg-white/20 hover:bg-white/30 px-2 py-1 rounded transition-colors"
+            title="Toggle Stats"
           >
-            {/* Chat header */}
-            <div className="card-header" style={{
-              padding: "1rem 1.5rem",
-              borderBottom: "1px solid var(--color-border)",
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              backgroundColor: "var(--color-card-bg)",
-            }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-                <FaRobot style={{ color: "var(--color-primary)", width: "1.25rem", height: "1.25rem" }} />
-                <h3 className="card-title" style={{ margin: 0 }}>
-                  {isInterviewMode ? "Rob (Interview Mode)" : "Rob.AI"}
-                </h3>
-              </div>
-              <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                <button
-                  onClick={() => setIsInterviewMode(!isInterviewMode)}
-                  style={{
-                    background: isInterviewMode ? "var(--color-primary)" : "var(--color-card-hover)",
-                    border: "1px solid var(--color-border)",
-                    color: isInterviewMode ? "white" : "var(--color-foreground)",
-                    cursor: "pointer",
-                    padding: "0.5rem 0.75rem",
-                    borderRadius: "0.25rem",
-                    fontSize: "0.75rem",
-                    fontWeight: "500",
-                    transition: "all 0.2s ease",
-                  }}
-                  onMouseOver={(e) => {
-                    if (!isInterviewMode) {
-                      e.currentTarget.style.backgroundColor = "var(--color-primary)";
-                      e.currentTarget.style.color = "white";
-                    }
-                  }}
-                  onMouseOut={(e) => {
-                    if (!isInterviewMode) {
-                      e.currentTarget.style.backgroundColor = "var(--color-card-hover)";
-                      e.currentTarget.style.color = "var(--color-foreground)";
-                    }
-                  }}
-                  aria-label="Toggle interview mode"
-                >
-                  {isInterviewMode ? "Normal" : "Interview"}
-                </button>
-                <button
-                  onClick={() => setIsOpen(false)}
-                  style={{
-                    background: "none",
-                    border: "none",
-                    color: "var(--color-muted-foreground)",
-                    cursor: "pointer",
-                    padding: "0.5rem",
-                    borderRadius: "0.25rem",
-                    transition: "color 0.2s ease, background-color 0.2s ease",
-                  }}
-                  onMouseOver={(e) => {
-                    e.currentTarget.style.backgroundColor = "var(--color-card-hover)";
-                    e.currentTarget.style.color = "var(--color-foreground)";
-                  }}
-                  onMouseOut={(e) => {
-                    e.currentTarget.style.backgroundColor = "transparent";
-                    e.currentTarget.style.color = "var(--color-muted-foreground)";
-                  }}
-                  aria-label="Close chat"
-                >
-                  <FaTimes style={{ width: "1.25rem", height: "1.25rem" }} />
-                </button>
-              </div>
-            </div>
+            📊
+          </button>
+          <button
+            onClick={() => setIsInterviewMode(!isInterviewMode)}
+            className={`text-xs px-2 py-1 rounded transition-colors ${
+              isInterviewMode 
+                ? 'bg-green-500 hover:bg-green-600' 
+                : 'bg-white/20 hover:bg-white/30'
+            }`}
+            title={isInterviewMode ? 'Switch to Normal Mode' : 'Switch to Interview Mode'}
+          >
+            {isInterviewMode ? '👤' : '🤖'}
+          </button>
+        </div>
+      </div>
 
-            {/* Chat messages */}
-            <div className="card-content" style={{
-              flex: 1,
-              overflowY: "auto",
-              padding: "1rem",
-              backgroundColor: "var(--color-card-bg)",
-              display: "flex",
-              flexDirection: "column",
-              gap: "1rem"
-            }}>
-              {messages.map((message, index) => (
-                <div
-                  key={index}
-                  style={{
-                    display: "flex",
-                    justifyContent: message.role === 'user' ? "flex-end" : "flex-start",
-                    alignItems: "flex-start",
-                    width: "100%",
-                  }}
-                >
-                  <div
-                    style={{
-                      maxWidth: "80%",
-                      padding: "0.75rem 1rem",
-                      borderRadius: "0.5rem",
-                      backgroundColor: message.role === 'user' 
-                        ? "var(--color-primary)" 
-                        : "var(--color-card-hover)",
-                      color: message.role === 'user' 
-                        ? "white" 
-                        : "var(--color-foreground)",
-                      boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-                      wordBreak: "break-word"
-                    }}
-                  >
-                    {message.content}
+      {/* Stats Panel */}
+      {showStats && stats && (
+        <div className="bg-gray-50 p-3 border-b border-gray-200 text-xs">
+          <div className="grid grid-cols-2 gap-2 mb-2">
+            <div>Total Requests: <span className="font-semibold">{stats.totalRequests}</span></div>
+            <div>Success Rate: <span className="font-semibold">{stats.successRate}%</span></div>
+            <div>Keyword Matches: <span className="font-semibold text-green-600">{stats.keywordMatches}</span></div>
+            <div>Default Responses: <span className="font-semibold text-red-600">{stats.defaultResponses}</span></div>
+          </div>
+          {stats.unmatchedQueries.length > 0 && (
+            <details className="text-xs">
+              <summary className="cursor-pointer text-blue-600 hover:text-blue-800">
+                Recent Unmatched Queries ({stats.unmatchedQueries.length})
+              </summary>
+              <div className="mt-1 max-h-20 overflow-y-auto">
+                {stats.unmatchedQueries.slice(-5).map((query, index) => (
+                  <div key={index} className="text-gray-600 py-1 border-b border-gray-200 last:border-b-0">
+                    "{query.query}"
                   </div>
-                </div>
-              ))}
-              
-              {isLoading && (
-                <div style={{ display: "flex", justifyContent: "flex-start" }}>
-                  <div style={{
-                    backgroundColor: "var(--color-card-hover)",
-                    color: "var(--color-foreground)",
-                    padding: "0.75rem 1rem",
-                    borderRadius: "0.5rem",
-                    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-                  }}>
-                    <div style={{ display: "flex", gap: "4px", alignItems: "center" }}>
-                      <div style={{
-                        width: "8px",
-                        height: "8px",
-                        borderRadius: "50%",
-                        backgroundColor: "var(--color-primary)",
-                        opacity: 0.7,
-                        animation: "bounce 1.4s infinite ease-in-out both",
-                        animationDelay: "0s"
-                      }} />
-                      <div style={{
-                        width: "8px",
-                        height: "8px",
-                        borderRadius: "50%",
-                        backgroundColor: "var(--color-primary)",
-                        opacity: 0.7,
-                        animation: "bounce 1.4s infinite ease-in-out both",
-                        animationDelay: "0.2s"
-                      }} />
-                      <div style={{
-                        width: "8px",
-                        height: "8px",
-                        borderRadius: "50%",
-                        backgroundColor: "var(--color-primary)",
-                        opacity: 0.7,
-                        animation: "bounce 1.4s infinite ease-in-out both",
-                        animationDelay: "0.4s"
-                      }} />
-                    </div>
-                  </div>
-                </div>
-              )}
-              
-              <div ref={messagesEndRef} />
-            </div>
+                ))}
+              </div>
+            </details>
+          )}
+        </div>
+      )}
 
-            {/* Chat input */}
-            <div className="card-footer" style={{
-              padding: "1rem",
-              borderTop: "1px solid var(--color-border)",
-              backgroundColor: "var(--color-card-bg)",
-            }}>
-              <form onSubmit={handleSubmit} style={{ display: "flex", gap: "0.5rem" }}>
-                <textarea
-                  ref={inputRef}
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  placeholder="Type your message..."
-                  style={{
-                    flex: 1,
-                    padding: "0.75rem 1rem",
-                    backgroundColor: "var(--color-card-hover)",
-                    border: "1px solid var(--color-border)",
-                    borderRadius: "0.5rem",
-                    color: "var(--color-foreground)",
-                    outline: "none",
-                    resize: "none",
-                    transition: "border-color 0.2s ease",
-                    fontFamily: "inherit",
-                    fontSize: "0.875rem",
-                    lineHeight: "1.5",
-                  }}
-                  rows={1}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' && !e.shiftKey) {
-                      e.preventDefault();
-                      handleSubmit(e);
-                    }
-                  }}
-                  onFocus={(e) => {
-                    e.currentTarget.style.borderColor = "var(--color-primary)";
-                  }}
-                  onBlur={(e) => {
-                    e.currentTarget.style.borderColor = "var(--color-border)";
-                  }}
-                />
-                <button
-                  type="submit"
-                  disabled={!input.trim() || isLoading}
-                  style={{
-                    padding: "0.75rem 1rem",
-                    backgroundColor: "var(--color-primary)",
-                    color: "white",
-                    border: "none",
-                    borderRadius: "0.5rem",
-                    cursor: !input.trim() || isLoading ? "not-allowed" : "pointer",
-                    transition: "all 0.2s ease",
-                    opacity: !input.trim() || isLoading ? 0.6 : 1,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                  onMouseOver={(e) => {
-                    if (input.trim() && !isLoading) {
-                      e.currentTarget.style.backgroundColor = "var(--color-primary-hover)";
-                      e.currentTarget.style.transform = "translateY(-2px)";
-                    }
-                  }}
-                  onMouseOut={(e) => {
-                    e.currentTarget.style.backgroundColor = "var(--color-primary)";
-                    e.currentTarget.style.transform = "translateY(0)";
-                  }}
-                >
-                  <FaPaperPlane style={{ width: "1.25rem", height: "1.25rem" }} />
-                </button>
-              </form>
+      {/* Messages */}
+      <div className="h-96 overflow-y-auto p-4 space-y-3">
+        {messages.map((message, index) => (
+          <div
+            key={index}
+            className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+          >
+            <div
+              className={`max-w-xs px-3 py-2 rounded-lg ${
+                message.role === 'user'
+                  ? 'bg-blue-500 text-white'
+                  : 'bg-gray-100 text-gray-800'
+              }`}
+            >
+              {message.content}
             </div>
-          </motion.div>
+          </div>
+        ))}
+        {isLoading && (
+          <div className="flex justify-start">
+            <div className="bg-gray-100 text-gray-800 px-3 py-2 rounded-lg">
+              <div className="flex space-x-1">
+                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+              </div>
+            </div>
+          </div>
         )}
-      </AnimatePresence>
-      
-      {/* Animation for the dots */}
-      <style jsx global>{`
-        @keyframes bounce {
-          0%, 80%, 100% { transform: scale(0); }
-          40% { transform: scale(1.0); }
-        }
-      `}</style>
-    </>
-  );
-});
+        <div ref={messagesEndRef} />
+      </div>
 
-AIChat.displayName = 'AIChat';
+      {/* Input Form */}
+      <form onSubmit={handleSubmit} className="p-4 border-t border-gray-200">
+        <div className="flex space-x-2">
+          <input
+            type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Ask me anything about Rob..."
+            className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            disabled={isLoading}
+          />
+          <button
+            type="submit"
+            disabled={isLoading || !input.trim()}
+            className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          >
+            Send
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+};
 
 export default AIChat; 
