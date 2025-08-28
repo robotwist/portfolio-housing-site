@@ -38,11 +38,14 @@ export default function HeroSection() {
           marginRight: 'auto',
           lineHeight: '2.25'
         }}>
-          I build software products that solve real problems, ship to users, and push creative boundaries.
-      
-          From practical tools that utilize machine learning and agentic use of advanced tools and interactive applications, my work demonstrates full-stack development, algorithmic thinking, and product-level design.
-        
-          Featured projects include running training platforms, agentic purified social media tools, Chrome extensions, and interactive games—all built with modern technologies and deployed to real users.
+          I'm a software developer who enjoys building web applications and exploring new technologies. 
+          My projects range from simple tools to more complex applications, each teaching me something new about development.
+          
+          I work with React, TypeScript, Node.js, and other modern web technologies. 
+          My background in athletics taught me discipline and persistence - qualities I bring to my coding projects.
+          
+          Below you'll find examples of my work, from Chrome extensions to web applications. 
+          Each project represents a learning experience and an opportunity to solve interesting problems.
         </p>
       </div>
       {/* Subtle background effect */}

@@ -12,100 +12,100 @@ try {
   console.log('Ollama not available, using keyword matching only');
 }
 
-// Enhanced fallback response patterns with personality and contact redirection
+// Enhanced fallback response patterns with honest, humble tone
 const FALLBACK_RESPONSES = [
   // Greetings
   {
     keywords: ['hello', 'hi', 'hey', 'good morning', 'good afternoon', 'good evening', 'greetings'],
-    response: "Hey there! 👋 I'm Rob.AI, your friendly guide to Rob's awesome portfolio! Want to chat about his projects or connect with him directly?",
+    response: "Hey there! 👋 I'm Rob.AI, a simple bot here to help you explore Rob's portfolio. Feel free to ask about his projects or how to get in touch!",
   },
   
   // Specific Projects
   {
     keywords: ['authentic internet', 'authentic-internet', 'authentic reader', 'authentic dashboard'],
-    response: "Authentic Internet is one of Rob's favorite projects! It's a full-stack social media data processing platform with interactive visualizations and real-time network analysis. He built it with Next.js and React, featuring responsive design and scalable architecture. It showcases his skills in data visualization, real-time processing, and modern web development. Pretty cool stuff! 🚀",
+    response: "Authentic Internet is one of Rob's projects exploring social media data visualization. It's built with Next.js and React, featuring interactive charts and data analysis tools. It demonstrates his interest in data processing and frontend development.",
   },
   {
     keywords: ['nkd man', 'nkd', 'summon', 'chrome extension', 'extension'],
-    response: "Summon NK D Man is Rob's hilarious Chrome extension! It unleashes NK D Man onto any webpage with a four-act streaking prank animation. Features smooth 60fps animations and creative problem-solving - it's got 8+ active users and showcases his JavaScript animation skills. Definitely one of his more entertaining projects! 😂",
+    response: "Summon NK D Man is a fun Chrome extension Rob built! It adds a playful animation to web pages. It's a simple project that demonstrates JavaScript animation skills and browser extension development.",
   },
   {
     keywords: ['deeply trivial', 'trivia', 'game', 'stacking trivia'],
-    response: "Deeply Trivial is Rob's fun trivia game! It's a web-based game with progressive difficulty levels and engaging gameplay. Built with modern web technologies, it showcases his skills in game development and user experience design. Want to try it out? Check out the live demo! 🎮",
+    response: "Deeply Trivial is a trivia game Rob built with React and TypeScript. It features progressive difficulty adjustment and responsive design. It's a good example of his game development and state management skills.",
   },
   {
     keywords: ['unforgiving minute', 'running', 'training', 'paces', 'calculator'],
-    response: "Unforgiving Minute is Rob's running training and coaching platform! It features a training paces calculator based on current race times, helping runners optimize their training. Built with his passion for athletics and technology, it combines his background as a D1 athlete with his software development skills. Perfect for runners looking to improve their performance! 🏃‍♂️",
+    response: "Unforgiving Minute is a running training platform Rob built. It includes a pace calculator based on current race times, helping runners determine appropriate training paces. It combines his interest in running with web development.",
   },
   {
     keywords: ['evolving machine', 'evolving the machine', 'ai game', 'video games'],
-    response: "Evolving the Machine is Rob's innovative game where a human and an evolving AI fight through the history of video games! It's a fascinating exploration of AI development and gaming history. The AI learns and adapts as it progresses through different gaming eras, showcasing Rob's interest in AI/ML and game development. A unique blend of technology and creativity! 🤖",
+    response: "Evolving the Machine is a game Rob built exploring AI evolution through video game history. It features interactive storytelling and evolutionary algorithms. It's an interesting project combining game development with AI concepts.",
   },
   
   // General Project Topics
   {
     keywords: ['project', 'portfolio', 'work', 'build', 'created', 'developed'],
-    response: "Rob's got some awesome projects! Check out the cards above - hover over them to see demos. If you want to discuss any of them in detail, you can reach out to Rob directly through the contact form or connect with him on LinkedIn!",
+    response: "Rob has several projects in his portfolio - you can see them in the cards above. Each represents different skills and learning experiences. Feel free to ask about specific ones or reach out to him directly!",
   },
   
   // Contact & Hiring
   {
     keywords: ['contact', 'reach', 'email', 'message', 'hire', 'job', 'opportunity', 'work together', 'collaborate', 'freelance', 'contract'],
-    response: "Great to hear you're interested in connecting! You can reach Rob through:\n\n1. The contact form below 👇\n2. LinkedIn: [Your LinkedIn URL]\n3. X (Twitter): [Your X handle]\n\nHe's always excited to hear about new opportunities!",
+    response: "Great to hear you're interested in connecting! You can reach Rob through the contact form below or connect with him on LinkedIn. He's always open to discussing new opportunities and collaborations.",
   },
   
   // Technical Skills
   {
     keywords: ['github', 'code', 'repository', 'repo', 'source code', 'open source'],
-    response: "Each project has its GitHub link - just click the GitHub icon on any project card! Rob loves open source and is always happy to discuss code. Want to connect with him about it?",
+    response: "Each project has its GitHub link - just click the GitHub icon on any project card! Rob enjoys sharing his code and is happy to discuss his projects and development approach.",
   },
   {
     keywords: ['skill', 'tech', 'technology', 'framework', 'language', 'programming', 'coding', 'development', 'software'],
-    response: "Rob's got a wide range of skills! From AI/ML to full-stack development, he's pretty versatile. The tech scroll above shows some of his expertise. Want to discuss how he could help your team?",
+    response: "Rob works with various technologies including React, TypeScript, Node.js, Python, and others. His projects demonstrate different aspects of web development. Feel free to ask about specific technologies!",
   },
   {
     keywords: ['react', 'next.js', 'node.js', 'javascript', 'typescript', 'python', 'mongodb', 'aws', 'docker'],
-    response: "Rob is proficient in React, Next.js, Node.js, TypeScript, Python, MongoDB, AWS, and Docker! He's built full-stack applications, AI integrations, and scalable systems. Want to discuss specific technologies or see his work in action?",
+    response: "Rob has experience with React, Next.js, Node.js, TypeScript, Python, MongoDB, and other technologies. His projects showcase different combinations of these tools. Want to discuss specific technologies?",
   },
   
   // Background & Experience
   {
     keywords: ['resume', 'cv', 'experience', 'background', 'history', 'career'],
-    response: "You can find Rob's resume right here on the site! It's in the resume section above. Want to discuss his experience in more detail? He'd love to chat - just use the contact form below!",
+    response: "You can find Rob's resume right here on the site! It's in the resume section above. He'd be happy to discuss his experience and background in more detail - just reach out!",
   },
   {
     keywords: ['athlete', 'd1', 'state champion', 'sports', 'climbing', 'mountains', 'peaks'],
-    response: "Rob was a D1 athlete and 9-time state champion! He's climbed 12 different 14,000 ft peaks across multiple states. His athletic background taught him discipline, work ethic, and determination - qualities he brings to every project! 🏔️",
+    response: "Rob has an athletic background and enjoys climbing. He finds that the discipline and persistence from sports translate well to software development. It's part of what drives his approach to problem-solving.",
   },
   
   // Games & Entertainment
   {
     keywords: ['game', 'pong', 'play', 'gaming', 'entertainment', 'fun'],
-    response: "Oh, you found the Pong game! 🎮 It's a fun little demo of Rob's game development skills. Want to see more of what he can build? Check out his other projects or reach out to discuss game development opportunities!",
+    response: "Oh, you found the Pong game! 🎮 It's a fun little demo of Rob's game development skills. He enjoys building interactive projects and exploring different types of applications.",
   },
   
   // AI & Machine Learning
   {
     keywords: ['ai', 'chatbot', 'bot', 'assistant', 'machine learning', 'ml', 'artificial intelligence', 'llama', 'ollama'],
-    response: "I'm just a simple bot, but Rob's working on some exciting AI projects! He's particularly interested in enhancing chatbots with advanced NLP and machine learning. Want to discuss AI development with him?",
+    response: "I'm a simple bot, but Rob is interested in AI and machine learning. He's worked on projects involving data analysis and is exploring ways to integrate AI into web applications.",
   },
   
   // Company & Business
   {
     keywords: ['company', 'startup', 'business', 'entrepreneur', 'founder', 'team', 'leadership'],
-    response: "Rob has experience working with teams and contributing to business success through technology. He's passionate about building solutions that drive real value. Want to discuss how he could help your company?",
+    response: "Rob has experience working on various projects and enjoys collaborating with teams. He's interested in building solutions that provide real value and is always learning new approaches.",
   },
   
   // Education & Learning
   {
     keywords: ['education', 'learn', 'study', 'degree', 'university', 'college', 'school'],
-    response: "Rob's educational background in athletics and his self-taught software development journey shows his ability to learn quickly and adapt. He's always expanding his skills and knowledge!",
+    response: "Rob is largely self-taught in software development, though he has a background in athletics. He's always learning new technologies and approaches, which is reflected in the variety of his projects.",
   },
   
   // Location & Travel
   {
     keywords: ['where', 'location', 'city', 'state', 'travel', 'remote', 'relocate'],
-    response: "Rob is based in the US and is open to remote work opportunities. He's traveled extensively for climbing adventures and is comfortable working with distributed teams!",
+    response: "Rob is based in the US and is open to remote work opportunities. He enjoys traveling and is comfortable working with distributed teams.",
   },
   
   // Availability & Timing
@@ -117,28 +117,28 @@ const FALLBACK_RESPONSES = [
   // Salary & Compensation
   {
     keywords: ['salary', 'pay', 'rate', 'compensation', 'budget', 'cost', 'price'],
-    response: "Rob is open to discussing compensation based on the scope and requirements of the project. He values fair compensation that reflects the value he brings. Let's have a conversation about your needs!",
+    response: "Rob is open to discussing compensation based on the scope and requirements of the project. He values fair compensation and is happy to have an open conversation about your needs.",
   },
   
   // Process & Approach
   {
     keywords: ['process', 'approach', 'methodology', 'how', 'workflow', 'agile', 'scrum'],
-    response: "Rob follows agile methodologies and believes in iterative development, clear communication, and delivering value quickly. He adapts his approach based on team needs and project requirements!",
+    response: "Rob follows agile methodologies and believes in iterative development, clear communication, and delivering value quickly. He adapts his approach based on team needs and project requirements.",
   }
 ];
 
-// Fun random responses for unmatched queries
+// Honest, humble random responses for unmatched queries
 const RANDOM_RESPONSES = [
-  "That's an interesting question! While I'm just a simple bot, Rob would love to chat about it. Did you know he was a D1 athlete? He brings that same dedication to his development work!",
-  "Hmm, that's beyond my simple programming. But I know Rob would be excited to discuss this! He's climbed 12 different 14,000 ft peaks across multiple states - he loves tackling big challenges!",
-  "I'm just a basic bot, but Rob's the real expert here. He was a 9-time state champion athlete - that's the kind of determination he brings to every project!",
-  "That's a great question! While I'm limited in my responses, Rob would be happy to dive deep into this topic with you. He's built some amazing AI-powered applications that you can check out in his portfolio!",
-  "I'm just here to help visitors, but Rob's the one you really want to talk to about that! He's developed several full-stack applications using React, Node.js, and MongoDB - check them out!",
-  "That's beyond my simple script, but I know Rob would love to discuss this with you. He's particularly proud of his work with AI integration and machine learning projects!",
-  "I'm just a friendly bot, but Rob's the real expert. He's worked on some fascinating game development projects using DragonRuby - you should check out his portfolio!",
-  "While I can't answer that, I know Rob would love to discuss it with you. He's got experience with cloud technologies and DevOps - AWS and Google Cloud are his specialties!",
-  "That's beyond my capabilities, but Rob would love to talk about it. He's worked with various cloud storage solutions and CDN implementations!",
-  "While I'm just a simple bot, Rob would be happy to discuss this. He's experienced with various authentication methods and security implementations!"
+  "That's an interesting question! While I'm just a simple bot, Rob would love to chat about it. He's always eager to learn and discuss new ideas.",
+  "Hmm, that's beyond my simple programming. But I know Rob would be excited to discuss this! He enjoys tackling new challenges and learning opportunities.",
+  "I'm just a basic bot, but Rob's the real expert here. He'd be happy to dive into this topic with you - feel free to reach out!",
+  "That's a great question! While I'm limited in my responses, Rob would be happy to discuss this with you. He's worked on various projects that might be relevant.",
+  "I'm just here to help visitors, but Rob's the one you really want to talk to about that! He's built several applications and would love to discuss your interests.",
+  "That's beyond my simple script, but I know Rob would love to discuss this with you. He's particularly interested in new technologies and approaches.",
+  "I'm just a friendly bot, but Rob's the real expert. He's worked on various projects and would be happy to discuss this topic with you.",
+  "While I can't answer that, I know Rob would love to discuss it with you. He has experience with various technologies and is always learning.",
+  "That's beyond my capabilities, but Rob would love to talk about it. He enjoys exploring new ideas and technologies.",
+  "While I'm just a simple bot, Rob would be happy to discuss this. He's worked on various projects and is always interested in new challenges."
 ];
 
 // Monitoring data structure

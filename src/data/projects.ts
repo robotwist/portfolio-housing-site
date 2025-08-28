@@ -5,8 +5,8 @@ export const projects: Project[] = [
   {
     id: "unforgiving-minute",
     title: "Unforgiving Minute",
-    description: "A running training and coaching platform with a dynamic GoldenPace Calculator used by athletes worldwide. Built with responsive design, real-time calculations, and user-focused interfaces to help athletes optimize training and track performance. Features advanced training algorithms and athletic analytics with clean, professional design.",
-    technologies: ["React", "TypeScript", "Node.js", "Training Algorithms", "Athletic Analytics"],
+    description: "A running training platform with a pace calculator based on current race times. Built with React and TypeScript, it helps runners determine appropriate training paces. Features responsive design and clean user interface. This project combines my interest in running with web development.",
+    technologies: ["React", "TypeScript", "Node.js", "Training Algorithms"],
     imageUrl: "/images/UnforgivingMinute.png",
     githubUrl: "https://github.com/robotwist/unforgiving-minute",
     liveUrl: "https://unforgivingminute.netlify.app/",
@@ -15,8 +15,8 @@ export const projects: Project[] = [
   {
     id: "authentic-reader",
     title: "Authentic Reader",
-    description: "An AI-powered content analysis tool that processes social media datasets to detect bias and manipulate networks in real-time. Features scalable ML pipelines, real-time network analysis, and actionable data design for misinformation detection and content filtering.",
-    technologies: ["Python", "Flask", "TensorFlow", "React", "AWS"],
+    description: "A content analysis tool that processes social media data to help identify patterns and potential bias. Built with Python and Flask for the backend, React for the frontend. Features data visualization and filtering capabilities. This project explores data processing and visualization techniques.",
+    technologies: ["Python", "Flask", "React", "AWS"],
     imageUrl: "/images/authentic-reader-screenshot.png",
     videoUrl: "/videos/authentic-reader.mp4",
     githubUrl: "https://github.com/robotwist/authentic-reader",
@@ -26,7 +26,7 @@ export const projects: Project[] = [
   {
     id: "authentic-internet",
     title: "Authentic Internet Game",
-    description: "Full-stack social media data processing platform with interactive visualizations and real-time network analysis. Features responsive design, scalable architecture, and engaging user interface for exploring social media data patterns and network relationships.",
+    description: "An interactive web application for exploring social media data patterns. Built with Next.js and React, it features data visualizations and network analysis tools. The project demonstrates frontend development skills and data presentation techniques.",
     technologies: ["Next.js", "React", "CSS"],
     imageUrl: "/images/authentic-internet.png",
     githubUrl: "https://github.com/robotwist/authentic-internet",
@@ -36,8 +36,8 @@ export const projects: Project[] = [
   {
     id: "virgil-ai",
     title: "Virgil AI Assistant",
-    description: "An AI-powered assistant that helps users with various tasks through natural language interaction. Features intelligent conversation memory, real-time response processing, and user-friendly interface showcasing AI integration and modern web development skills.",
-    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "AI/ML"],
+    description: "A chatbot interface built with Next.js and TypeScript. Features conversation memory and a clean user interface. This project explores AI integration and modern web development practices.",
+    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
     imageUrl: "/images/virgil-ai.png",
     videoUrl: "/videos/virgil-ai.mp4",
     githubUrl: "https://github.com/robotwist/virgil-ai-assistant",
@@ -49,8 +49,8 @@ export const projects: Project[] = [
   {
     id: "deeply-trivial",
     title: "Deeply Trivial",
-    description: "AI-powered trivia game with dynamic difficulty scaling and intelligent question generation. Features responsive design, real-time gameplay, and engaging user interface showcasing algorithmic thinking and modern front-end development skills.",
-    technologies: ["React", "TypeScript", "AI/ML", "Node.js", "MongoDB"],
+    description: "A trivia game with dynamic difficulty adjustment. Built with React and TypeScript, it features responsive design and progressive difficulty scaling. The project demonstrates game development concepts and state management.",
+    technologies: ["React", "TypeScript", "Node.js", "MongoDB"],
     imageUrl: "/images/Deeply Trivial.png",
     githubUrl: "https://github.com/robotwist/deeply-trivial",
     liveUrl: "https://stacking-trivia-five-deep.netlify.app/",
@@ -59,19 +59,19 @@ export const projects: Project[] = [
   {
     id: "evolving-machine",
     title: "Evolving the Machine",
-    description: "A game exploring AI evolution through the history of video games with evolutionary algorithms and real-time AI adaptation. Features interactive storytelling, creative problem-solving, and engaging gameplay demonstrating algorithm design and modern game development skills.",
-    technologies: ["React", "TypeScript", "AI/ML", "Game Development", "Evolutionary Algorithms"],
+    description: "A game exploring AI evolution through video game history. Built with React and TypeScript, it features interactive storytelling and evolutionary algorithms. This project combines game development with AI concepts.",
+    technologies: ["React", "TypeScript", "Game Development", "Evolutionary Algorithms"],
     imageUrl: "/images/EvolveTM.png",
     githubUrl: "https://github.com/robotwist/evolving-machine",
     liveUrl: "https://evolving-the-machine.netlify.app/",
     upvotes: 12
   },
   
-  // CHROME EXTENSIONS - Practical tools shipped to real users
+  // CHROME EXTENSIONS - Practical tools
   {
     id: "facebook-friends-only",
     title: "Facebook Friends Only Mode",
-    description: "A Chrome extension with 15+ active users and 4.6/5 Chrome Web Store rating. Simplifies Facebook UI to show only friends' posts, removing ads and distractions. Features clean, intuitive interface with 99.9% uptime and user-reported improved focus during social media browsing.",
+    description: "A Chrome extension that simplifies Facebook's interface to show only friends' posts. Built with JavaScript and CSS, it removes ads and distractions. Features clean interface design and DOM manipulation techniques.",
     technologies: ["Chrome Extension", "JavaScript", "CSS", "HTML"],
     imageUrl: "/images/facebook-friends-only.png",
     githubUrl: "https://github.com/robotwist/facebook-friends-only",
@@ -81,7 +81,7 @@ export const projects: Project[] = [
   {
     id: "instagone",
     title: "Instagone",
-    description: "A Chrome extension with 12+ active users and 4.7/5 rating that helps reclaim time by removing Instagram distractions. Features 99.9% uptime, 50ms load times, and user-reported improved productivity by reducing social media time-wasting features.",
+    description: "A Chrome extension that helps reduce Instagram distractions by removing certain features. Built with JavaScript and CSS, it demonstrates browser extension development and user experience design.",
     technologies: ["Chrome Extension", "JavaScript", "CSS", "HTML"],
     imageUrl: "/images/instagone.png",
     githubUrl: "https://github.com/robotwist/instagone",
@@ -91,7 +91,7 @@ export const projects: Project[] = [
   {
     id: "linkedin-jobs-only",
     title: "LinkedIn Jobs Only Mode",
-    description: "A Chrome extension with 18+ active users and 4.8/5 rating that filters LinkedIn for focused job searching. Features clean, distraction-free interface with 99.9% uptime and user-reported improved job search efficiency by removing feed distractions.",
+    description: "A Chrome extension that filters LinkedIn for focused job searching. Built with JavaScript and CSS, it removes feed distractions and focuses on job listings. Features clean interface design.",
     technologies: ["Chrome Extension", "JavaScript", "CSS", "HTML"],
     imageUrl: "/images/linkedin-jobs-only.jpg",
     videoUrl: "/videos/linkedin-jobs-only.mp4",
@@ -102,7 +102,7 @@ export const projects: Project[] = [
   {
     id: "summon-nkd-man",
     title: "Summon NK D Man",
-    description: "A fun Chrome extension with 8+ active users that unleashes NK D Man onto any webpage with a four-act streaking prank animation. Features smooth 60fps animations, creative problem-solving, and playful design that showcases JavaScript animation skills.",
+    description: "A fun Chrome extension that adds a playful animation to web pages. Built with JavaScript and CSS, it features smooth animations and creative problem-solving. This project demonstrates JavaScript animation skills.",
     technologies: ["Chrome Extension", "JavaScript", "CSS", "HTML"],
     imageUrl: "/images/summon-nkd-man.png",
     videoUrl: "/videos/summon-nkd-man.mp4",
@@ -115,7 +115,7 @@ export const projects: Project[] = [
   {
     id: "100m-dash",
     title: "100 Meter Dash",
-    description: "A fun keyboard mashing game inspired by old school olympics games. Features responsive canvas animations, real-time leaderboards, and competitive gameplay showcasing front-end development skills and creative game design.",
+    description: "A simple keyboard-based game inspired by old school olympics games. Built with JavaScript and HTML Canvas, it features responsive animations and competitive gameplay. This project demonstrates front-end development skills.",
     technologies: ["JavaScript", "HTML Canvas", "CSS"],
     imageUrl: "/images/100-meter-dash.jpg",
     githubUrl: "https://github.com/robotwist/100-meter-dash",
@@ -125,7 +125,7 @@ export const projects: Project[] = [
   {
     id: "coin-flip",
     title: "Coin Flip Game",
-    description: "A simple yet addictive coin flipping game with real-time Firebase leaderboards and responsive design. Features smooth animations, competitive gameplay mechanics, and modern web development practices showcasing JavaScript and Firebase integration skills.",
+    description: "A simple coin flipping game with Firebase leaderboards. Built with JavaScript and Firebase, it features smooth animations and competitive gameplay. This project demonstrates Firebase integration and modern web development.",
     technologies: ["JavaScript", "HTML", "CSS", "Firebase"],
     imageUrl: "/images/Coin-Flip.png",
     githubUrl: "https://github.com/robotwist/Coin-Flip-Game-Project-One-GA",
@@ -135,7 +135,7 @@ export const projects: Project[] = [
   {
     id: "ledgerline",
     title: "LedgerLine",
-    description: "A modern accounting platform built with React and Node.js featuring real-time financial tracking, secure data encryption, and responsive dashboard design. Showcases full-stack development skills, database management, and business application design with clean, professional interface.",
+    description: "A basic accounting platform built with React and Node.js. Features financial tracking and responsive dashboard design. This project demonstrates full-stack development skills and business application design.",
     technologies: ["React", "Node.js", "Express", "MongoDB", "Tailwind"],
     imageUrl: "/images/Ledgerline-Opening.png",
     videoUrl: "",
@@ -146,7 +146,7 @@ export const projects: Project[] = [
   {
     id: "authentic-dashboard",
     title: "Authentic Dashboard",
-    description: "Admin dashboard for the Authentic Reader platform with interactive visualizations and real-time data processing. Features responsive design with D3.js charts, advanced filtering capabilities, and clean Material UI interface for comprehensive data analysis and monitoring.",
+    description: "An admin dashboard for data visualization built with React and TypeScript. Features interactive charts using D3.js and Material UI components. This project demonstrates data visualization and dashboard development skills.",
     technologies: ["React", "TypeScript", "Material UI", "D3.js", "Redux"],
     imageUrl: "/images/authentic-dashboard.png",
     videoUrl: "/videos/authentic-dashboard.mp4",
