@@ -10,7 +10,7 @@ export const projects: Project[] = [
     imageUrl: "/images/UnforgivingMinute.png",
     githubUrl: "https://github.com/robotwist/unforgiving-minute",
     liveUrl: "https://unforgivingminute.netlify.app/",
-    upvotes: 6
+    upvotes: 0
   },
   {
     id: "authentic-reader",
@@ -21,7 +21,7 @@ export const projects: Project[] = [
     videoUrl: "/videos/authentic-reader.mp4",
     githubUrl: "https://github.com/robotwist/authentic-reader",
     liveUrl: "https://authentic-reader.netlify.app/",
-    upvotes: 15
+    upvotes: 0
   },
   {
     id: "authentic-internet",
@@ -31,7 +31,7 @@ export const projects: Project[] = [
     imageUrl: "/images/authentic-internet.png",
     githubUrl: "https://github.com/robotwist/authentic-internet",
     liveUrl: "https://flourishing-starburst-8cf88b.netlify.app/",
-    upvotes: 17
+    upvotes: 0
   },
   {
     id: "virgil-ai",
@@ -54,7 +54,7 @@ export const projects: Project[] = [
     imageUrl: "/images/Deeply Trivial.png",
     githubUrl: "https://github.com/robotwist/deeply-trivial",
     liveUrl: "https://stacking-trivia-five-deep.netlify.app/",
-    upvotes: 8
+    upvotes: 0
   },
   {
     id: "evolving-machine",
@@ -64,7 +64,7 @@ export const projects: Project[] = [
     imageUrl: "/images/EvolveTM.png",
     githubUrl: "https://github.com/robotwist/evolving-machine",
     liveUrl: "https://evolving-the-machine.netlify.app/",
-    upvotes: 12
+    upvotes: 0
   },
   
   // CHROME EXTENSIONS - Practical tools
@@ -120,7 +120,7 @@ export const projects: Project[] = [
     imageUrl: "/images/100-meter-dash.jpg",
     githubUrl: "https://github.com/robotwist/100-meter-dash",
     liveUrl: "https://robotwist.github.io/100-meter-dash/",
-    upvotes: 7
+    upvotes: 0
   },
   {
     id: "coin-flip",
@@ -130,7 +130,7 @@ export const projects: Project[] = [
     imageUrl: "/images/Coin-Flip.png",
     githubUrl: "https://github.com/robotwist/Coin-Flip-Game-Project-One-GA",
     liveUrl: "https://robotwist.github.io/Coin-Flip-Game-Project-One-GA/",
-    upvotes: 5
+    upvotes: 0
   },
   {
     id: "ledgerline",
@@ -141,7 +141,7 @@ export const projects: Project[] = [
     videoUrl: "",
     githubUrl: "https://github.com/robotwist/Ledgerline",
     liveUrl: "https://ledgerline-a661b98ef7f7.herokuapp.com/",
-    upvotes: 8
+    upvotes: 0
   },
   {
     id: "authentic-dashboard",
@@ -151,6 +151,6 @@ export const projects: Project[] = [
     imageUrl: "/images/authentic-dashboard.png",
     videoUrl: "/videos/authentic-dashboard.mp4",
     githubUrl: "https://github.com/robotwist/authentic-dashboard",
-    upvotes: 9
+    upvotes: 0
   }
 ]; 
